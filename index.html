@@ -1,334 +1,561 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Become a Certified Aura Reader | Free Workshop</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Astro Vastu Masterclass | Nidhi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Manrope:wght@300;400;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: '#05020D',
+                        nebula: '#1A0B2E',
+                        gold: {
+                            DEFAULT: '#D4AF37',
+                            light: '#F5E0A3',
+                            glow: '#FFD700'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cinzel"', 'serif'],
+                        sans: ['"Manrope"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'cosmic-gradient': 'radial-gradient(circle at 50% 0%, #2D1B4E 0%, #05020D 60%)',
+                        'gold-shimmer': 'linear-gradient(45deg, #996515, #D4AF37, #F5E0A3, #D4AF37, #996515)',
+                    },
+                    boxShadow: {
+                        'neon-gold': '0 0 20px rgba(212, 175, 55, 0.3), inset 0 0 10px rgba(212, 175, 55, 0.1)',
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.5)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #05020D;
+            color: white;
+            overflow-x: hidden;
+        }
 
+        /* Parallax Stars */
+        .stars-wrapper {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
 
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+
+        /* Glass Effect */
+        .glass-panel {
+            background: rgba(26, 11, 46, 0.3);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Golden Text Gradient */
+        .text-gold-gradient {
+            background: linear-gradient(to bottom, #F5E0A3, #D4AF37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Animated Button */
+        .btn-cosmic {
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* Floating Element */
+        .float {
+            animation: floating 6s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+    </style>
 </head>
 
-<body>
+<body class="antialiased">
 
-    <div class="top-announcement">Learn The Most Powerful In-Demand Skill of 2025</div>
+    <!-- BACKGROUND EFFECTS -->
+    <div class="stars-wrapper" id="stars"></div>
+    <div class="fixed top-0 left-0 w-full h-[600px] bg-cosmic-gradient opacity-80 pointer-events-none z-0"></div>
 
-    <section class="hero-section">
-        <div class="hero-bg"></div>
+    <!-- HEADER -->
+    <nav
+        class="fixed w-full z-50 top-0 transition-all duration-300 border-b border-white/5 bg-void/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i data-lucide="sun" class="text-gold-DEFAULT w-6 h-6 animate-pulse"></i>
+                <span class="font-serif text-xl tracking-[0.2em] text-white">ASTRO VASTU</span>
+            </div>
+            <div class="hidden md:flex items-center gap-6 text-sm font-semibold tracking-wide text-gold-light/80">
+                <span><i data-lucide="calendar" class="inline w-4 h-4 mb-1 mr-1"></i> 2nd Aug 2025</span>
+                <span><i data-lucide="clock" class="inline w-4 h-4 mb-1 mr-1"></i> 8 PM</span>
+                <a href="#register"
+                    class="bg-gold-DEFAULT text-void px-6 py-2 rounded-none clip-path-slant hover:bg-white transition-colors font-bold">
+                    RESERVE SEAT
+                </a>
+            </div>
+        </div>
+    </nav>
 
-        <div class="hero-overlay"></div>
+    <!-- HERO SECTION -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 z-10">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center">
 
-        <div class="container hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    Discover How You Can Master The Powerful Skill Of <br>
-                    <span class="aura-text">Aura Reading</span>
+            <!-- Text Content -->
+            <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                <div class="inline-block border border-gold-DEFAULT/30 bg-gold-DEFAULT/10 px-4 py-1 rounded-full">
+                    <span class="text-gold-light text-xs font-bold tracking-[0.2em] uppercase">✨ Live Masterclass with
+                        Nidhi</span>
+                </div>
+
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif leading-tight">
+                    Are Problems Repeating <br />
+                    <span class="text-gold-gradient italic">In Your Life?</span>
                 </h1>
 
-                <p class="hero-sub">
-                    Become A Certified Aura Reader, Start Making
-                    <span class="highlight-money">₹50,000+ Per Month</span>
-                    From Your HOME.
+                <p class="text-xl md:text-2xl text-gray-300 font-light border-l-2 border-gold-DEFAULT pl-6">
+                    Your Home's Energy Might Be the Reason. Solve problems related to <span
+                        class="text-white font-semibold">Money, Relationships, Health & Career</span> without expensive
+                    remedies.
                 </p>
 
-                <div class="hero-cta-box">
-                    <p class="workshop-tag">
-                        <i class="fas fa-broadcast-tower"></i> FREE Live Workshop with Sandeep Sharma
-                    </p>
-
-                    <a href="#register" class="btn-hero">
-                        YES! I Want to Become an Expert <i class="fas fa-arrow-right"></i>
+                <div class="flex flex-col sm:flex-row gap-6 pt-4 justify-center lg:justify-start">
+                    <a href="#register"
+                        class="btn-cosmic bg-gold-shimmer text-void text-lg font-bold py-4 px-10 rounded shadow-neon-gold hover:scale-105 transition-transform flex items-center justify-center gap-3">
+                        Join Masterclass @ 199/- <i data-lucide="arrow-right"></i>
                     </a>
 
-                    <div class="hero-limited">
-                        <span class="pulsing-dot"></span> Limited FREE Tickets Available
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="custom-shape-divider-bottom-1695043236">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
-                preserveAspectRatio="none">
-                <path d="M1200 120L0 16.48V0h1200v120z" class="shape-fill"></path>
-            </svg>
-        </div>
-    </section>
-
-    <section class="discover">
-        <div class="container">
-            <div class="text-center" style="margin-bottom: 50px;">
-                <h2>Here's What You'll Discover In This Workshop:</h2>
-            </div>
-            <div class="discover-grid">
-                <div class="discover-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1528319725582-ddc096101511?q=80&w=800&auto=format&fit=crop"
-                        alt="Aura Reading Illustration">
-                </div>
-                <div class="discover-list">
-                    <div class="discover-item">
-                        <i class="fas fa-eye"></i>
-                        <div>
-                            <h4>Aura Mechanics</h4>
-                            <p>Learn how Aura Reading works - the exact process professionals use.</p>
+                    <div class="flex items-center gap-4 text-left">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-gold-DEFAULT blur rounded-full opacity-40"></div>
+                            <img src="https://ui-avatars.com/api/?name=Nidhi&background=000&color=D4AF37"
+                                class="w-12 h-12 rounded-full border border-gold-DEFAULT relative z-10" alt="Nidhi">
                         </div>
-                    </div>
-                    <div class="discover-item">
-                        <i class="fas fa-spa"></i>
                         <div>
-                            <h4>Chakra Balancing</h4>
-                            <p>Learn how chakra balancing works and how to use it as a professional.</p>
-                        </div>
-                    </div>
-                    <div class="discover-item">
-                        <i class="fas fa-wallet"></i>
-                        <div>
-                            <h4>Pricing Strategies</h4>
-                            <p>Pricing strategies & session structures (so you can confidently charge clients).</p>
-                        </div>
-                    </div>
-                    <div class="discover-item">
-                        <i class="fas fa-project-diagram"></i>
-                        <div>
-                            <h4>Step-by-Step System</h4>
-                            <p>The step-by-step system to analyze & interpret energy fields.</p>
-                        </div>
-                    </div>
-                    <div class="discover-item">
-                        <i class="fas fa-chart-line"></i>
-                        <div>
-                            <h4>Real Case Study</h4>
-                            <p>Case study of How I am making more than ₹5,00,000+ per month.</p>
+                            <p class="text-xs text-gold-light uppercase tracking-widest">Your Host</p>
+                            <p class="font-serif text-lg">Nidhi</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="divider-curve">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
-                preserveAspectRatio="none">
-                <path
-                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                    class="shape-fill"></path>
-            </svg>
-        </div>
-    </section>
 
-    <section class="who-for">
-        <div class="container">
-            <h2>Who This Workshop is For:</h2>
-            <div class="cards-grid">
-                <div class="feature-card">
-                    <i class="fas fa-user-check"></i>
-                    <div>
-                        <h4>Complete Beginner</h4>
-                        <p>A complete beginner wanting to learn a profitable new skill.</p>
-                    </div>
+            <!-- Hero Visual (Not a slide image, but a composition) -->
+            <div class="lg:col-span-5 relative float">
+                <!-- Sacred Geometry Ring -->
+                <div
+                    class="absolute inset-0 border border-gold-DEFAULT/20 rounded-full animate-[spin_20s_linear_infinite]">
                 </div>
-                <div class="feature-card">
-                    <i class="fas fa-hands-helping"></i>
-                    <div>
-                        <h4>Healers & Coaches</h4>
-                        <p>A healer, coach, or therapist wanting to add Aura Reading as a paid service.</p>
-                    </div>
+                <div
+                    class="absolute inset-4 border border-gold-DEFAULT/20 rounded-full animate-[spin_15s_linear_infinite_reverse]">
                 </div>
-                <div class="feature-card">
-                    <i class="fas fa-heart"></i>
-                    <div>
-                        <h4>Service Oriented</h4>
-                        <p>Ready to serve others while creating a stable monthly income.</p>
+
+                <div
+                    class="relative glass-panel p-8 rounded-2xl text-center transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                    <div
+                        class="absolute -top-6 -right-6 bg-gold-DEFAULT text-void font-bold p-4 rounded-full shadow-neon-gold animate-bounce">
+                        ₹45k<br><span class="text-[10px] uppercase">Bonus</span>
                     </div>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-dove"></i>
-                    <div>
-                        <h4>Spiritual Seekers</h4>
-                        <p>Someone seeking financial freedom in the spiritual field.</p>
+                    <h3 class="font-serif text-2xl mb-4 text-white">Unlock Your Home's<br>Cosmic Blueprint</h3>
+                    <div class="grid grid-cols-2 gap-4 text-xs text-gold-light text-left">
+                        <div class="bg-void/40 p-3 rounded border border-white/10 flex items-center gap-2">
+                            <i data-lucide="check" class="text-green-400 w-4 h-4"></i> No Demolition
+                        </div>
+                        <div class="bg-void/40 p-3 rounded border border-white/10 flex items-center gap-2">
+                            <i data-lucide="check" class="text-green-400 w-4 h-4"></i> Astro-Aligned
+                        </div>
+                        <div class="bg-void/40 p-3 rounded border border-white/10 flex items-center gap-2">
+                            <i data-lucide="check" class="text-green-400 w-4 h-4"></i> Scientific
+                        </div>
+                        <div class="bg-void/40 p-3 rounded border border-white/10 flex items-center gap-2">
+                            <i data-lucide="check" class="text-green-400 w-4 h-4"></i> Instant Results
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="high-income">
-        <div class="container">
-            <h2>Why Aura Reading is a High-Income Skill</h2>
-            <div class="income-row">
-                <div class="income-box">
-                    <i class="fas fa-rocket"></i>
-                    <h4>Fastest Growing Service</h4>
-                    <p>One of the fastest-growing services in the wellness & spiritual space.</p>
+    <!-- KEY HIGHLIGHTS STRIP -->
+    <div class="border-y border-white/10 bg-white/5 backdrop-blur-sm relative z-10">
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <div
+                class="grid md:grid-cols-3 gap-8 text-center md:text-left divide-y md:divide-y-0 md:divide-x divide-white/10">
+                <div class="px-4 pt-4 md:pt-0">
+                    <i data-lucide="zap" class="text-gold-DEFAULT w-8 h-8 mb-3 mx-auto md:mx-0"></i>
+                    <h4 class="font-serif text-lg mb-1">Identify Energy Blocks</h4>
+                    <p class="text-sm text-gray-400">Instantly spot issues even if your home looks perfect.</p>
                 </div>
-                <div class="income-box">
-                    <i class="fas fa-laptop-house"></i>
-                    <h4>Zero Investment</h4>
-                    <p>Start your practice online or offline, with zero heavy investment.</p>
+                <div class="px-4 pt-4 md:pt-0">
+                    <i data-lucide="shield-check" class="text-gold-DEFAULT w-8 h-8 mb-3 mx-auto md:mx-0"></i>
+                    <h4 class="font-serif text-lg mb-1">Top 3 Mistakes</h4>
+                    <p class="text-sm text-gray-400">Discover layout errors people unknowingly make.</p>
                 </div>
-                <div class="income-box">
-                    <i class="fas fa-rupee-sign"></i>
-                    <h4>High Fees</h4>
-                    <p>People are ready to pay ₹1,500 - ₹5,000 per session for expert guidance.</p>
+                <div class="px-4 pt-4 md:pt-0">
+                    <i data-lucide="search" class="text-gold-DEFAULT w-8 h-8 mb-3 mx-auto md:mx-0"></i>
+                    <h4 class="font-serif text-lg mb-1">Root Cause Check</h4>
+                    <p class="text-sm text-gray-400">Uncover what to check first when things go wrong.</p>
                 </div>
-                <div class="income-box">
-                    <i class="fas fa-clock"></i>
-                    <h4>Flexible Career</h4>
-                    <p>A flexible career you can build part-time or full-time.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAIN POINTS (The Void) -->
+    <section class="py-24 relative z-10">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-5xl font-serif mb-16">
+                Feeling <span class="text-red-500 line-through decoration-white/30">Stuck</span> In Life?
+                <br><span class="text-base font-sans text-gray-400 tracking-wide mt-4 block">Even After Trying
+                    Everything?</span>
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="glass-panel p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 group">
+                    <div
+                        class="w-14 h-14 bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-red-900/50 transition-colors">
+                        <i data-lucide="coins" class="text-red-400 w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-serif text-xl mb-3">Money Issues</h3>
+                    <p class="text-sm text-gray-400">Money comes but doesn't stay.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="glass-panel p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 group">
+                    <div
+                        class="w-14 h-14 bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-red-900/50 transition-colors">
+                        <i data-lucide="heart-crack" class="text-red-400 w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-serif text-xl mb-3">Relationship Tension</h3>
+                    <p class="text-sm text-gray-400">Constant conflicts in marriage.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass-panel p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 group">
+                    <div
+                        class="w-14 h-14 bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-red-900/50 transition-colors">
+                        <i data-lucide="graduation-cap" class="text-red-400 w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-serif text-xl mb-3">Kids' Focus</h3>
+                    <p class="text-sm text-gray-400">Children losing focus in studies.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="glass-panel p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 group">
+                    <div
+                        class="w-14 h-14 bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-red-900/50 transition-colors">
+                        <i data-lucide="activity" class="text-red-400 w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-serif text-xl mb-3">Health Issues</h3>
+                    <p class="text-sm text-gray-400">Sickness with no clear cause.</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="glass-panel p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 group">
+                    <div
+                        class="w-14 h-14 bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-red-900/50 transition-colors">
+                        <i data-lucide="briefcase" class="text-red-400 w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-serif text-xl mb-3">Career Delay</h3>
+                    <p class="text-sm text-gray-400">Stress & delay in business.</p>
+                </div>
+                <!-- Card 6 -->
+                <div class="glass-panel p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 group">
+                    <div
+                        class="w-14 h-14 bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-red-900/50 transition-colors">
+                        <i data-lucide="refresh-ccw" class="text-red-400 w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-serif text-xl mb-3">Temporary Fixes</h3>
+                    <p class="text-sm text-gray-400">Old advice only worked briefly.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="testimonials">
-        <div class="container">
-            <h2 class="text-center">Have a look at what others have to say</h2>
-            <div class="carousel-container">
-                <div class="testi-card">
-                    <h4>Priya Mehta</h4>
-                    <span>Delhi</span>
-                    <p class="testi-quote">"I never thought I could learn this so quickly. Sandeep makes it so easy to
-                        understand."</p>
-                </div>
-                <div class="testi-card">
-                    <h4>Shaurya</h4>
-                    <span>Punjab</span>
-                    <p class="testi-quote">"This workshop changed my career path. I now take sessions on weekends."</p>
-                </div>
-                <div class="testi-card">
-                    <h4>Sharad</h4>
-                    <span>Delhi</span>
-                    <p class="testi-quote">"The energy scanning techniques are incredibly accurate. Highly recommended!"
+    <!-- CHECKLIST / AUDIENCE -->
+    <section class="py-24 bg-nebula/50 relative z-10 border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-center font-serif text-3xl mb-12">Is This For You? <span class="text-gold-DEFAULT">Yes, If
+                    You...</span></h2>
+
+            <div class="space-y-4">
+                <div
+                    class="flex items-center gap-4 p-4 rounded bg-white/5 hover:bg-white/10 transition-colors border-l-4 border-gold-DEFAULT">
+                    <i data-lucide="check-circle-2" class="text-gold-DEFAULT shrink-0"></i>
+                    <p class="text-gray-200">Are a Seeker who believes there's a deeper cause behind what's happening.
                     </p>
                 </div>
-                <div class="testi-card">
-                    <h4>Abhishek</h4>
-                    <span>Madhya Pradesh</span>
-                    <p class="testi-quote">"Finally a practical approach to spirituality. The pricing module was a game
-                        changer."</p>
+                <div
+                    class="flex items-center gap-4 p-4 rounded bg-white/5 hover:bg-white/10 transition-colors border-l-4 border-gold-DEFAULT">
+                    <i data-lucide="check-circle-2" class="text-gold-DEFAULT shrink-0"></i>
+                    <p class="text-gray-200">Care about your home's energy, but don't know how to "read" or balance it.
+                    </p>
+                </div>
+                <div
+                    class="flex items-center gap-4 p-4 rounded bg-white/5 hover:bg-white/10 transition-colors border-l-4 border-gold-DEFAULT">
+                    <i data-lucide="check-circle-2" class="text-gold-DEFAULT shrink-0"></i>
+                    <p class="text-gray-200">Believe in creating a peaceful, intentional life & not just surviving day
+                        to day.</p>
+                </div>
+                <div
+                    class="flex items-center gap-4 p-4 rounded bg-white/5 hover:bg-white/10 transition-colors border-l-4 border-gold-DEFAULT">
+                    <i data-lucide="check-circle-2" class="text-gold-DEFAULT shrink-0"></i>
+                    <p class="text-gray-200">Are ready for a shift - not just in knowledge, but in how your life flows.
+                    </p>
+                </div>
+
+                <!-- Special Callout -->
+                <div
+                    class="mt-8 p-6 rounded-xl border border-gold-DEFAULT/40 bg-gold-DEFAULT/10 flex items-start gap-4">
+                    <i data-lucide="star" class="text-gold-glow w-6 h-6 shrink-0 mt-1"></i>
+                    <p class="font-bold text-gold-light">Perfect for Architects, Interior Designers, Decor Consultants,
+                        or Property Dealers looking to Amplify Business with Astro-Vastu insights.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="instructor">
-        <div class="container">
-            <div class="instructor-container">
-                <div class="instructor-img">
-                    <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=800&auto=format&fit=crop"
-                        alt="Sandeep Sharma">
-                </div>
-                <div class="instructor-content">
-                    <h2>Sandeep Sharma</h2>
-                    <h3>Aura Reading Specialist</h3>
-                    <p>Over the past decade, Sandeep Sharma has helped 1500+ clients and students unlock their energetic
-                        potential and realign their path to health, harmony, and prosperity.</p>
+    <!-- COMPARISON -->
+    <section class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-center font-serif text-3xl md:text-4xl mb-16">Why Generic Vastu Fails <br><span
+                    class="text-gray-500 text-xl font-sans">(vs What Actually Works)</span></h2>
 
-                    <p>His unique method blends:</p>
-                    <div class="skills-badges">
-                        <span class="skill-badge"><i class="fas fa-check"></i> Aura Scanning</span>
-                        <span class="skill-badge"><i class="fas fa-check"></i> Chakra Balancing</span>
-                        <span class="skill-badge"><i class="fas fa-check"></i> Vedic Astrology</span>
-                        <span class="skill-badge"><i class="fas fa-check"></i> Vastu Energy</span>
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-16">
+                <!-- Generic -->
+                <div class="p-8 rounded-2xl bg-red-950/20 border border-red-900/30">
+                    <h3 class="text-red-400 font-serif text-xl mb-6 flex items-center gap-2"><i
+                            data-lucide="x-circle"></i> Traditional Vastu</h3>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li class="flex gap-2"><span class="text-red-500">✕</span> Costly renovations that disrupt your
+                            life.</li>
+                        <li class="flex gap-2"><span class="text-red-500">✕</span> Generic internet tips that don't
+                            match reality.</li>
+                        <li class="flex gap-2"><span class="text-red-500">✕</span> One-size-fits-all cures ignoring
+                            energy blueprint.</li>
+                        <li class="flex gap-2"><span class="text-red-500">✕</span> No alignment with your astrological
+                            chart.</li>
+                        <li class="flex gap-2"><span class="text-red-500">✕</span> Surface-level fixes treating symptoms
+                            only.</li>
+                    </ul>
+                </div>
+
+                <!-- Astro Vastu -->
+                <div class="p-8 rounded-2xl bg-gold-DEFAULT/10 border border-gold-DEFAULT/30 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-gold-DEFAULT blur-[50px] opacity-20"></div>
+                    <h3 class="text-gold-DEFAULT font-serif text-xl mb-6 flex items-center gap-2"><i
+                            data-lucide="check-circle-2"></i> The Astro-Vastu Method</h3>
+                    <ul class="space-y-4 text-gray-200 text-sm font-medium">
+                        <li class="flex gap-2"><span class="text-gold-DEFAULT">✓</span> Powerful non-invasive remedies
+                            (minimal changes).</li>
+                        <li class="flex gap-2"><span class="text-gold-DEFAULT">✓</span> 100% personalized map from birth
+                            chart.</li>
+                        <li class="flex gap-2"><span class="text-gold-DEFAULT">✓</span> Remedies tailored to wealth,
+                            health, peace.</li>
+                        <li class="flex gap-2"><span class="text-gold-DEFAULT">✓</span> Aligned with planetary positions
+                            for depth.</li>
+                        <li class="flex gap-2"><span class="text-gold-DEFAULT">✓</span> Root-cause healing at the
+                            source.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BONUSES -->
+    <section class="py-24 bg-nebula relative z-10 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-gold-DEFAULT uppercase tracking-widest text-xs font-bold">Live Only Exclusives</span>
+                <h2 class="text-3xl md:text-5xl font-serif mt-2">Bonuses Worth <span
+                        class="text-gold-glow">₹45,000</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Bonus 1 -->
+                <div class="glass-panel p-8 rounded-xl text-center group hover:-translate-y-2 transition-transform">
+                    <div
+                        class="w-16 h-16 rounded-full border border-gold-DEFAULT/30 flex items-center justify-center mx-auto mb-6 bg-void text-gold-DEFAULT group-hover:scale-110 transition-transform">
+                        <i data-lucide="book-open" class="w-8 h-8"></i>
                     </div>
-                    <p>People call his approach “shockingly accurate, deeply healing, and instantly transformative.”</p>
-                    <p style="margin-top: 20px; font-weight: 600; color: var(--primary-navy);">Do join me LIVE Inside
-                        the Become Aura Reader Workshop!</p>
+                    <div class="inline-block bg-white/10 px-3 py-1 rounded text-xs mb-4">Value: ₹11,000</div>
+                    <h3 class="font-serif text-xl text-white mb-2">Vastu Starter Kit</h3>
+                    <p class="text-sm text-gray-400">Top 11 Remedies for Peace & Prosperity (PDF)</p>
+                </div>
+                <!-- Bonus 2 -->
+                <div
+                    class="glass-panel p-8 rounded-xl text-center group hover:-translate-y-2 transition-transform border-gold-DEFAULT/50 relative">
+                    <div
+                        class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold-DEFAULT text-void text-[10px] font-bold px-3 py-1 rounded-full uppercase">
+                        Most Popular</div>
+                    <div
+                        class="w-16 h-16 rounded-full border border-gold-DEFAULT/30 flex items-center justify-center mx-auto mb-6 bg-void text-gold-DEFAULT group-hover:scale-110 transition-transform">
+                        <i data-lucide="ticket" class="w-8 h-8"></i>
+                    </div>
+                    <div class="inline-block bg-white/10 px-3 py-1 rounded text-xs mb-4">Value: ₹31,000</div>
+                    <h3 class="font-serif text-xl text-white mb-2">Lucky Draw</h3>
+                    <p class="text-sm text-gray-400">Chance to Win FREE Personal Consultation</p>
+                </div>
+                <!-- Bonus 3 -->
+                <div class="glass-panel p-8 rounded-xl text-center group hover:-translate-y-2 transition-transform">
+                    <div
+                        class="w-16 h-16 rounded-full border border-gold-DEFAULT/30 flex items-center justify-center mx-auto mb-6 bg-void text-gold-DEFAULT group-hover:scale-110 transition-transform">
+                        <i data-lucide="sparkles" class="w-8 h-8"></i>
+                    </div>
+                    <div class="inline-block bg-white/10 px-3 py-1 rounded text-xs mb-4">Value: ₹3,100</div>
+                    <h3 class="font-serif text-xl text-white mb-2">Aura Cleansing Guide</h3>
+                    <p class="text-sm text-gray-400">Improve Energy Instantly (PDF)</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bonuses">
-        <div class="container">
-            <h2>When You Join the Free Training, You'll Get Access To:</h2>
-            <div class="bonus-grid">
-                <div class="bonus-card">
-                    <i class="fas fa-magnet fa-3x" style="color: var(--accent-orange); margin-bottom:15px;"></i>
-                    <h3>Bonus #1</h3>
-                    <h4>Client Attraction Blueprint</h4>
-                    <p>Worth ₹ 3500/-</p>
-                </div>
-                <div class="bonus-card">
-                    <i class="fas fa-gem fa-3x" style="color: var(--accent-orange); margin-bottom:15px;"></i>
-                    <h3>Bonus #2</h3>
-                    <h4>Wealth Attraction Guide PDF</h4>
-                    <p>Worth ₹ 4000/-</p>
-                </div>
-            </div>
+    <!-- TESTIMONIALS -->
+    <section class="py-24 relative z-10">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-serif mb-12">Lives Transformed by <span class="text-gold-DEFAULT">Nidhi's
+                    Guidance</span></h2>
 
-            <div class="value-box text-white">
-                <p>Total Value Of Bonuses: <strong>₹7,500</strong> | Normal Ticket Price: <strong>₹999</strong></p>
-                <div style="margin-top: 15px; font-size: 1.5rem;">
-                    Join Today For: <span class="price-strike">₹999</span> <span class="price-free">FREE</span>
+            <div class="grid md:grid-cols-2 gap-8 text-left">
+                <div class="bg-white/5 p-8 rounded-xl border-l-4 border-gold-DEFAULT">
+                    <div class="flex text-gold-DEFAULT mb-4"><i data-lucide="star" class="fill-current w-4 h-4"></i><i
+                            data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star"
+                            class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i
+                            data-lucide="star" class="fill-current w-4 h-4"></i></div>
+                    <p class="text-gray-300 italic mb-6">"Before the Vastu corrections, we were facing constant stress,
+                        health concerns, and financial instability. But after your expert advice... found it very
+                        accurate."</p>
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center font-serif font-bold">
+                            S</div>
+                        <div>
+                            <p class="font-bold">Samiksha</p>
+                        </div>
+                    </div>
                 </div>
-                <div style="margin-top: 20px;">
-                    <a href="#register" class="btn-cta" style="box-shadow: none; border: 2px solid white;">Reserve My
-                        Seat Now</a>
+                <div class="bg-white/5 p-8 rounded-xl border-l-4 border-gold-DEFAULT">
+                    <div class="flex text-gold-DEFAULT mb-4"><i data-lucide="star" class="fill-current w-4 h-4"></i><i
+                            data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star"
+                            class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i
+                            data-lucide="star" class="fill-current w-4 h-4"></i></div>
+                    <p class="text-gray-300 italic mb-6">"Simple yet powerful remedies, there has been a noticeable
+                        positive shift in our lives. The energy in our home feels lighter, more balanced, and peaceful."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center font-serif font-bold">
+                            AT</div>
+                        <div>
+                            <p class="font-bold">Akash Tyagi Ji</p>
+                        </div>
+                    </div>
                 </div>
-                <p style="margin-top: 10px; font-size: 0.9rem; color: #ffcc80;"><i class="fas fa-hourglass-half"></i>
-                    Time is running out!</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="faq">
-        <div class="container">
-            <h2 class="text-center text-navy">Frequently Asked Questions</h2>
-            <div style="max-width: 800px; margin: 0 auto;">
-                <details class="faq-item">
-                    <summary>Do I need prior experience in healing?</summary>
-                    <p>No, this workshop is beginner-friendly. You'll learn step-by-step from scratch.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Can I really earn money from this skill?</summary>
-                    <p>Yes! People pay ₹1,500 - ₹5,000 per session for Aura Readings. Even with 15 - 20 clients a month,
-                        you can make ₹30,000 - ₹1,00,000.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>How long before I can start offering sessions?</summary>
-                    <p>Many students begin within weeks after practicing the techniques taught.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Is the workshop really free?</summary>
-                    <p>Yes, 100% free. Just reserve your spot before seats run out.</p>
-                </details>
             </div>
         </div>
     </section>
 
-    <footer id="register">
-        <div class="footer-cta">
-            <h2 style="color: white;">YES! I Want to Become an Aura Reading Expert</h2>
-            <p class="text-white" style="margin-bottom: 30px;">LIMITED FREE TICKETS</p>
-            <a href="#" class="btn-cta">Register Now For FREE</a>
-            <p style="margin-top: 20px; font-size: 0.9rem; color: #ccc;">Register before 21st September 2025 to unlock
-                Surprise Bonuses</p>
-        </div>
-        <div class="footer-legal">
-            <div class="container">
-                <p>This site is not a part of the Facebook™ website or Facebook™ Inc. Additionally, This site is NOT
-                    endorsed by Facebook™ in any way. FACEBOOK™ is a trademark of FACEBOOK™, Inc.</p>
-                <p>As stipulated by law, we can not and do not make any guarantees about your ability to get results or
-                    earn any money with my ideas, information, tools or strategies. I just want to help you by giving
-                    great content, direction and strategies that worked well for me and my students and that I believe
-                    can help you move forward.</p>
+    <!-- CTA FOOTER -->
+    <section id="register" class="py-24 relative z-10 overflow-hidden">
+        <div class="absolute inset-0 bg-gold-DEFAULT/10 blur-[100px] pointer-events-none"></div>
 
-                <div style="margin-top: 20px;">
-                    <a href="#">Terms & Conditions</a> | <a href="#">Privacy Policy</a> | <a href="#">Disclaimer</a>
+        <div class="max-w-2xl mx-auto px-6 text-center relative">
+            <h2 class="text-4xl md:text-5xl font-serif mb-6">Stop Guessing. <br>Start <span
+                    class="text-gold-DEFAULT">Fixing.</span></h2>
+            <p class="text-red-400 font-semibold animate-pulse mb-8">⚠️ Only 30 Seats Per Batch! Live Interactive
+                Webinar.</p>
+
+            <!-- Countdown -->
+            <div class="flex justify-center gap-4 mb-10 font-serif">
+                <div class="text-center">
+                    <div class="text-3xl text-gold-light">26</div>
+                    <div class="text-[10px] text-gray-500 uppercase">Days</div>
                 </div>
-                <div style="margin-top: 20px; color: var(--accent-orange);">
-                    &copy; 2025 Sandeep Sharma Aura Reading. All Rights Reserved.
+                <div class="text-center">
+                    <div class="text-3xl text-gold-light">18</div>
+                    <div class="text-[10px] text-gray-500 uppercase">Hrs</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl text-gold-light">08</div>
+                    <div class="text-[10px] text-gray-500 uppercase">Mins</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl text-gold-light">01</div>
+                    <div class="text-[10px] text-gray-500 uppercase">Secs</div>
                 </div>
             </div>
-        </div>
-    </footer>
 
+            <div class="glass-panel p-8 rounded-2xl">
+                <form class="space-y-4" onsubmit="event.preventDefault(); alert('Redirecting to payment gateway...');">
+                    <input type="text" placeholder="Enter Your Name"
+                        class="w-full bg-void/50 border border-white/10 rounded p-4 text-white focus:border-gold-DEFAULT outline-none transition-colors">
+                    <input type="email" placeholder="Enter Your Email"
+                        class="w-full bg-void/50 border border-white/10 rounded p-4 text-white focus:border-gold-DEFAULT outline-none transition-colors">
+                    <input type="tel" placeholder="Phone Number"
+                        class="w-full bg-void/50 border border-white/10 rounded p-4 text-white focus:border-gold-DEFAULT outline-none transition-colors">
+
+                    <button
+                        class="w-full btn-cosmic bg-gold-shimmer text-void font-bold text-xl py-4 rounded hover:brightness-110 transition-all">
+                        Reserve Your Spot Now
+                    </button>
+                </form>
+            </div>
+
+            <footer class="mt-16 text-gray-600 text-sm">
+                <p>&copy; 2025 Nidhi Astro Vastu. All rights reserved.</p>
+            </footer>
+        </div>
+    </section>
+
+    <script>
+        // Icons
+        lucide.createIcons();
+
+        // Stars Generation
+        const stars = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 2;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animation = `twinkle ${Math.random() * 3 + 2}s infinite`;
+            stars.appendChild(star);
+        }
+    </script>
 </body>
 
 </html>
+```
