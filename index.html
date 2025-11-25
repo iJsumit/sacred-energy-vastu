@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Astro Vastu Masterclass | Nidhi</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: Cinzel Decorative for that 'Ancient Magic' feel, and Raleway for clean luxury text -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Manrope:wght@300;400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Raleway:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -15,25 +16,56 @@
             theme: {
                 extend: {
                     colors: {
-                        void: '#05020D',
-                        nebula: '#1A0B2E',
+                        cosmos: {
+                            950: '#020005', // Absolute Void
+                            900: '#090116', // Deepest Violet
+                            800: '#14032C', // Rich Indigo
+                            700: '#24064F', // Mystic Purple
+                        },
                         gold: {
-                            DEFAULT: '#D4AF37',
-                            light: '#F5E0A3',
-                            glow: '#FFD700'
-                        }
+                            100: '#FFF9E5',
+                            300: '#FFD700', // Standard Gold
+                            400: '#FFC125', // Goldenrod
+                            500: '#DAA520', // Golden Grass
+                            600: '#B8860B', // Dark Goldenrod
+                        },
+                        astral: '#E0AAFF'
                     },
                     fontFamily: {
-                        serif: ['"Cinzel"', 'serif'],
-                        sans: ['"Manrope"', 'sans-serif'],
+                        magic: ['"Cinzel Decorative"', 'serif'],
+                        sans: ['"Raleway"', 'sans-serif'],
                     },
                     backgroundImage: {
-                        'cosmic-gradient': 'radial-gradient(circle at 50% 0%, #2D1B4E 0%, #05020D 60%)',
-                        'gold-shimmer': 'linear-gradient(45deg, #996515, #D4AF37, #F5E0A3, #D4AF37, #996515)',
+                        'nebula-gradient': 'radial-gradient(circle at 50% 50%, #24064F 0%, #090116 50%, #020005 100%)',
+                        'stardust': 'radial-gradient(white 1px, transparent 1px)',
+                        'gold-shimmer': 'linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(255,215,0,0.4) 50%, rgba(255,215,0,0.1) 100%)',
+                        'button-gradient': 'linear-gradient(to right, #B8860B, #FFD700, #B8860B)'
                     },
                     boxShadow: {
-                        'neon-gold': '0 0 20px rgba(212, 175, 55, 0.3), inset 0 0 10px rgba(212, 175, 55, 0.1)',
-                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.5)',
+                        'glow-gold': '0 0 30px rgba(255, 215, 0, 0.2)',
+                        'glow-text': '0 0 10px rgba(255, 215, 0, 0.5)',
+                        'obsidian': '0 8px 32px 0 rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255, 215, 0, 0.15)',
+                    },
+                    animation: {
+                        'spin-slow': 'spin 60s linear infinite',
+                        'spin-reverse': 'spin 80s linear infinite reverse',
+                        'pulse-magical': 'pulseMagical 4s ease-in-out infinite',
+                        'float': 'float 8s ease-in-out infinite',
+                        'twinkle': 'twinkle 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        pulseMagical: {
+                            '0%, 100%': { opacity: 0.6, transform: 'scale(1)' },
+                            '50%': { opacity: 1, transform: 'scale(1.1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        twinkle: {
+                            '0%, 100%': { opacity: 0.3 },
+                            '50%': { opacity: 1 },
+                        }
                     }
                 }
             }
@@ -41,13 +73,13 @@
     </script>
     <style>
         body {
-            background-color: #05020D;
+            background-color: #020005;
             color: white;
             overflow-x: hidden;
         }
 
-        /* Parallax Stars */
-        .stars-wrapper {
+        /* Dynamic Star Background */
+        .stars-container {
             position: fixed;
             inset: 0;
             pointer-events: none;
@@ -58,151 +90,170 @@
             position: absolute;
             background: white;
             border-radius: 50%;
-            opacity: 0.7;
+            animation: twinkle var(--duration) infinite;
         }
 
-        /* Glass Effect */
-        .glass-panel {
-            background: rgba(26, 11, 46, 0.3);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 215, 0, 0.1);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Golden Text Gradient */
-        .text-gold-gradient {
-            background: linear-gradient(to bottom, #F5E0A3, #D4AF37);
+        /* Text Gradients */
+        .text-gradient-gold {
+            background: linear-gradient(to bottom, #FFF9E5, #FFD700, #B8860B);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
         }
 
-        /* Animated Button */
-        .btn-cosmic {
+        /* Obsidian Glass Card */
+        .card-obsidian {
+            background: rgba(10, 5, 20, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8);
+            transition: all 0.4s ease;
+        }
+
+        .card-obsidian:hover {
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        /* Button Shine Effect */
+        .btn-gold {
             background-size: 200% auto;
-            animation: shimmer 3s linear infinite;
+            transition: 0.5s;
         }
 
-        @keyframes shimmer {
-            to {
-                background-position: 200% center;
-            }
+        .btn-gold:hover {
+            background-position: right center;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
         }
 
-        /* Floating Element */
-        .float {
-            animation: floating 6s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-15px);
-            }
+        /* Constellation Lines SVG Background */
+        .constellation-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L30 40 L60 20 L90 50' stroke='rgba(255,255,255,0.05)' stroke-width='0.5' fill='none'/%3E%3Ccircle cx='10' cy='10' r='1' fill='rgba(255,255,255,0.1)'/%3E%3Ccircle cx='30' cy='40' r='1' fill='rgba(255,255,255,0.1)'/%3E%3Ccircle cx='60' cy='20' r='1' fill='rgba(255,255,255,0.1)'/%3E%3Ccircle cx='90' cy='50' r='1' fill='rgba(255,255,255,0.1)'/%3E%3C/svg%3E");
         }
     </style>
 </head>
 
-<body class="antialiased">
+<body class="antialiased font-sans">
 
-    <!-- BACKGROUND EFFECTS -->
-    <div class="stars-wrapper" id="stars"></div>
-    <div class="fixed top-0 left-0 w-full h-[600px] bg-cosmic-gradient opacity-80 pointer-events-none z-0"></div>
+    <!-- GLOBAL BACKGROUND -->
+    <div class="fixed inset-0 bg-nebula-gradient z-[-2]"></div>
+    <div class="stars-container" id="stars-container"></div>
+    <div class="fixed inset-0 constellation-bg opacity-30 z-[-1]"></div>
 
-    <!-- HEADER -->
-    <nav
-        class="fixed w-full z-50 top-0 transition-all duration-300 border-b border-white/5 bg-void/80 backdrop-blur-md">
+    <!-- FLOATING MAGIC ORBS -->
+    <div
+        class="fixed top-0 left-0 w-[500px] h-[500px] bg-cosmos-700 rounded-full blur-[150px] opacity-20 animate-pulse-magical z-[-1]">
+    </div>
+    <div class="fixed bottom-0 right-0 w-[600px] h-[600px] bg-gold-600 rounded-full blur-[180px] opacity-10 animate-pulse-magical z-[-1]"
+        style="animation-delay: 2s;"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 border-b border-gold-500/10 bg-cosmos-950/80 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <i data-lucide="sun" class="text-gold-DEFAULT w-6 h-6 animate-pulse"></i>
-                <span class="font-serif text-xl tracking-[0.2em] text-white">ASTRO VASTU</span>
+            <div class="flex items-center gap-3">
+                <!-- Simple Logo Icon -->
+                <div
+                    class="w-10 h-10 rounded-full border border-gold-400 flex items-center justify-center bg-gold-400/10">
+                    <i data-lucide="star" class="text-gold-400 w-5 h-5 fill-current animate-pulse"></i>
+                </div>
+                <span class="font-magic text-xl md:text-2xl text-white tracking-widest bg-clip-text">ASTRO VASTU</span>
             </div>
-            <div class="hidden md:flex items-center gap-6 text-sm font-semibold tracking-wide text-gold-light/80">
-                <span><i data-lucide="calendar" class="inline w-4 h-4 mb-1 mr-1"></i> 2nd Aug 2025</span>
-                <span><i data-lucide="clock" class="inline w-4 h-4 mb-1 mr-1"></i> 8 PM</span>
+
+            <div class="hidden md:flex items-center gap-8">
+                <div class="flex items-center gap-2 text-sm font-medium text-gold-100">
+                    <i data-lucide="calendar" class="text-gold-400 w-4 h-4"></i> 2nd Aug 2025
+                </div>
+                <div class="flex items-center gap-2 text-sm font-medium text-gold-100">
+                    <i data-lucide="clock" class="text-gold-400 w-4 h-4"></i> 8 PM
+                </div>
                 <a href="#register"
-                    class="bg-gold-DEFAULT text-void px-6 py-2 rounded-none clip-path-slant hover:bg-white transition-colors font-bold">
-                    RESERVE SEAT
+                    class="bg-button-gradient btn-gold text-cosmos-950 font-bold px-8 py-2.5 rounded-sm uppercase tracking-wider text-sm">
+                    Reserve Seat
                 </a>
             </div>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 z-10">
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center">
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden min-h-screen flex items-center">
+        <!-- ZODIAC WHEEL BACKGROUND DECORATION -->
+        <div
+            class="absolute top-1/2 right-[-10%] lg:right-[5%] -translate-y-1/2 w-[600px] h-[600px] lg:w-[800px] lg:h-[800px] border border-gold-500/10 rounded-full animate-spin-slow pointer-events-none z-0 hidden lg:block">
+            <div class="absolute inset-4 border border-gold-500/10 rounded-full border-dashed"></div>
+            <div class="absolute inset-0 flex items-center justify-center font-magic text-gold-500/5 text-9xl">♈ ♉ ♊ ♋ ♌
+                ♍ ♎ ♏ ♐ ♑ ♒ ♓</div>
+        </div>
 
-            <!-- Text Content -->
-            <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
-                <div class="inline-block border border-gold-DEFAULT/30 bg-gold-DEFAULT/10 px-4 py-1 rounded-full">
-                    <span class="text-gold-light text-xs font-bold tracking-[0.2em] uppercase">✨ Live Masterclass with
-                        Nidhi</span>
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+
+            <!-- LEFT: COPY -->
+            <div class="text-center lg:text-left space-y-8">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold-500/30 bg-gold-500/10 backdrop-blur-md">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-gold-400"></i>
+                    <span class="text-gold-100 text-xs font-bold tracking-[0.2em] uppercase">The Ancient Science of
+                        Space</span>
                 </div>
 
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif leading-tight">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-magic leading-[1.1]">
                     Are Problems Repeating <br />
-                    <span class="text-gold-gradient italic">In Your Life?</span>
+                    <span class="text-gradient-gold drop-shadow-lg">In Your Life?</span>
                 </h1>
 
-                <p class="text-xl md:text-2xl text-gray-300 font-light border-l-2 border-gold-DEFAULT pl-6">
-                    Your Home's Energy Might Be the Reason. Solve problems related to <span
-                        class="text-white font-semibold">Money, Relationships, Health & Career</span> without expensive
-                    remedies.
+                <p class="text-xl text-indigo-100/80 font-light leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                    Your Home's Energy Might Be the Reason. Unlock the secrets to solving problems in <span
+                        class="text-gold-300 font-semibold border-b border-gold-500/30 pb-1">Money, Relationships,
+                        Health & Career</span>.
                 </p>
 
-                <div class="flex flex-col sm:flex-row gap-6 pt-4 justify-center lg:justify-start">
+                <div class="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start pt-4">
                     <a href="#register"
-                        class="btn-cosmic bg-gold-shimmer text-void text-lg font-bold py-4 px-10 rounded shadow-neon-gold hover:scale-105 transition-transform flex items-center justify-center gap-3">
-                        Join Masterclass @ 199/- <i data-lucide="arrow-right"></i>
+                        class="group relative bg-button-gradient btn-gold text-cosmos-950 text-lg font-bold py-4 px-10 rounded-sm shadow-glow-gold hover:scale-105 transition-transform flex items-center justify-center gap-3">
+                        <span class="relative z-10">Join Masterclass @ 199/-</span>
+                        <i data-lucide="arrow-right"
+                            class="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform"></i>
                     </a>
+                </div>
 
-                    <div class="flex items-center gap-4 text-left">
-                        <div class="relative">
-                            <div class="absolute inset-0 bg-gold-DEFAULT blur rounded-full opacity-40"></div>
-                            <img src="https://ui-avatars.com/api/?name=Nidhi&background=000&color=D4AF37"
-                                class="w-12 h-12 rounded-full border border-gold-DEFAULT relative z-10" alt="Nidhi">
-                        </div>
-                        <div>
-                            <p class="text-xs text-gold-light uppercase tracking-widest">Your Host</p>
-                            <p class="font-serif text-lg">Nidhi</p>
-                        </div>
-                    </div>
+                <div
+                    class="flex items-center justify-center lg:justify-start gap-4 text-sm text-gold-500/60 pt-2 font-mono uppercase tracking-widest">
+                    <span><i data-lucide="users" class="inline w-4 h-4 mr-2"></i> Only 30 Seats Left</span>
                 </div>
             </div>
 
-            <!-- Hero Visual (Not a slide image, but a composition) -->
-            <div class="lg:col-span-5 relative float">
-                <!-- Sacred Geometry Ring -->
+            <!-- RIGHT: THE MAGICAL IMAGE -->
+            <div class="relative flex justify-center lg:justify-end animate-float">
+                <!-- Glow Behind Image -->
+                <div class="absolute inset-0 bg-gold-500/20 blur-[80px] rounded-full animate-pulse-magical"></div>
+
+                <!-- Orbiting Particles -->
                 <div
-                    class="absolute inset-0 border border-gold-DEFAULT/20 rounded-full animate-[spin_20s_linear_infinite]">
-                </div>
-                <div
-                    class="absolute inset-4 border border-gold-DEFAULT/20 rounded-full animate-[spin_15s_linear_infinite_reverse]">
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border border-gold-500/20 rounded-full animate-spin-reverse border-dotted">
                 </div>
 
+                <!-- Image Container with Frame -->
                 <div
-                    class="relative glass-panel p-8 rounded-2xl text-center transform rotate-3 hover:rotate-0 transition-transform duration-500">
-                    <div
-                        class="absolute -top-6 -right-6 bg-gold-DEFAULT text-void font-bold p-4 rounded-full shadow-neon-gold animate-bounce">
-                        ₹45k<br><span class="text-[10px] uppercase">Bonus</span>
-                    </div>
-                    <h3 class="font-serif text-2xl mb-4 text-white">Unlock Your Home's<br>Cosmic Blueprint</h3>
-                    <div class="grid grid-cols-2 gap-4 text-xs text-gold-light text-left">
-                        <div class="bg-void/40 p-3 rounded border border-white/10 flex items-center gap-2">
-                            <i data-lucide="check" class="text-green-400 w-4 h-4"></i> No Demolition
+                    class="relative z-10 p-2 bg-gradient-to-b from-gold-500/50 to-transparent rounded-2xl backdrop-blur-sm">
+                    <div class="relative rounded-xl overflow-hidden shadow-2xl border border-gold-500/30">
+                        <img src="bNJ_1751176326764_live_222.avif" alt="Nidhi Astro Vastu Host"
+                            class="w-full h-auto max-w-md object-cover transform transition-transform duration-700 hover:scale-105">
+
+                        <!-- Overlay Gradient for text readability on image if needed -->
+                        <div
+                            class="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/80 to-transparent">
                         </div>
-                        <div class="bg-void/40 p-3 rounded border border-white/10 flex items-center gap-2">
-                            <i data-lucide="check" class="text-green-400 w-4 h-4"></i> Astro-Aligned
-                        </div>
-                        <div class="bg-void/40 p-3 rounded border border-white/10 flex items-center gap-2">
-                            <i data-lucide="check" class="text-green-400 w-4 h-4"></i> Scientific
-                        </div>
-                        <div class="bg-void/40 p-3 rounded border border-white/10 flex items-center gap-2">
-                            <i data-lucide="check" class="text-green-400 w-4 h-4"></i> Instant Results
+
+                        <!-- Name Badge -->
+                        <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                            <div>
+                                <p class="text-gold-400 text-xs uppercase tracking-widest mb-1">Your Host</p>
+                                <p class="font-magic text-2xl text-white">Nidhi</p>
+                            </div>
+                            <div
+                                class="bg-gold-500 text-cosmos-950 text-xs font-bold px-3 py-1 rounded-full animate-bounce">
+                                LIVE
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -210,136 +261,147 @@
         </div>
     </section>
 
-    <!-- KEY HIGHLIGHTS STRIP -->
-    <div class="border-y border-white/10 bg-white/5 backdrop-blur-sm relative z-10">
-        <div class="max-w-7xl mx-auto px-6 py-8">
-            <div
-                class="grid md:grid-cols-3 gap-8 text-center md:text-left divide-y md:divide-y-0 md:divide-x divide-white/10">
-                <div class="px-4 pt-4 md:pt-0">
-                    <i data-lucide="zap" class="text-gold-DEFAULT w-8 h-8 mb-3 mx-auto md:mx-0"></i>
-                    <h4 class="font-serif text-lg mb-1">Identify Energy Blocks</h4>
-                    <p class="text-sm text-gray-400">Instantly spot issues even if your home looks perfect.</p>
+    <!-- KEY HIGHLIGHTS (Scrolls/Cards) -->
+    <div class="relative z-10 border-y border-gold-500/10 bg-cosmos-900/50 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <div class="grid md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-gold-500/10">
+                <!-- Item 1 -->
+                <div class="px-6 pt-4 md:pt-0 text-center md:text-left group cursor-default">
+                    <div
+                        class="w-12 h-12 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center mb-4 mx-auto md:mx-0 group-hover:bg-gold-500 group-hover:text-cosmos-950 transition-colors duration-300">
+                        <i data-lucide="zap" class="w-6 h-6 text-gold-400 group-hover:text-cosmos-950"></i>
+                    </div>
+                    <h4 class="font-magic text-xl text-white mb-2">Identify Blocks</h4>
+                    <p class="text-sm text-indigo-200/60 leading-relaxed">Instantly spot invisible energy drains even if
+                        your home looks perfect on the surface.</p>
                 </div>
-                <div class="px-4 pt-4 md:pt-0">
-                    <i data-lucide="shield-check" class="text-gold-DEFAULT w-8 h-8 mb-3 mx-auto md:mx-0"></i>
-                    <h4 class="font-serif text-lg mb-1">Top 3 Mistakes</h4>
-                    <p class="text-sm text-gray-400">Discover layout errors people unknowingly make.</p>
+                <!-- Item 2 -->
+                <div class="px-6 pt-4 md:pt-0 text-center md:text-left group cursor-default">
+                    <div
+                        class="w-12 h-12 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center mb-4 mx-auto md:mx-0 group-hover:bg-gold-500 group-hover:text-cosmos-950 transition-colors duration-300">
+                        <i data-lucide="alert-triangle" class="w-6 h-6 text-gold-400 group-hover:text-cosmos-950"></i>
+                    </div>
+                    <h4 class="font-magic text-xl text-white mb-2">3 Fatal Mistakes</h4>
+                    <p class="text-sm text-indigo-200/60 leading-relaxed">Discover the top layout errors people
+                        unknowingly make that block their success.</p>
                 </div>
-                <div class="px-4 pt-4 md:pt-0">
-                    <i data-lucide="search" class="text-gold-DEFAULT w-8 h-8 mb-3 mx-auto md:mx-0"></i>
-                    <h4 class="font-serif text-lg mb-1">Root Cause Check</h4>
-                    <p class="text-sm text-gray-400">Uncover what to check first when things go wrong.</p>
+                <!-- Item 3 -->
+                <div class="px-6 pt-4 md:pt-0 text-center md:text-left group cursor-default">
+                    <div
+                        class="w-12 h-12 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center mb-4 mx-auto md:mx-0 group-hover:bg-gold-500 group-hover:text-cosmos-950 transition-colors duration-300">
+                        <i data-lucide="compass" class="w-6 h-6 text-gold-400 group-hover:text-cosmos-950"></i>
+                    </div>
+                    <h4 class="font-magic text-xl text-white mb-2">Root Cause</h4>
+                    <p class="text-sm text-indigo-200/60 leading-relaxed">Uncover what to check first when things keep
+                        going wrong in life or business.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- PAIN POINTS (The Void) -->
+    <!-- PAIN POINTS SECTION -->
     <section class="py-24 relative z-10">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-5xl font-serif mb-16">
-                Feeling <span class="text-red-500 line-through decoration-white/30">Stuck</span> In Life?
-                <br><span class="text-base font-sans text-gray-400 tracking-wide mt-4 block">Even After Trying
-                    Everything?</span>
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-5xl font-magic mb-6">
+                Feeling <span class="text-gradient-gold italic">Stuck or Blocked?</span>
             </h2>
+            <p class="text-indigo-200/60 text-lg mb-16">Even after trying everything else?</p>
 
             <div class="grid md:grid-cols-3 gap-6">
                 <!-- Card 1 -->
-                <div class="glass-panel p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 group">
-                    <div
-                        class="w-14 h-14 bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-red-900/50 transition-colors">
-                        <i data-lucide="coins" class="text-red-400 w-6 h-6"></i>
+                <div class="card-obsidian p-8 rounded-lg text-left group">
+                    <div class="mb-4 opacity-50 group-hover:opacity-100 transition-opacity">
+                        <i data-lucide="coins" class="w-8 h-8 text-gold-400"></i>
                     </div>
-                    <h3 class="font-serif text-xl mb-3">Money Issues</h3>
-                    <p class="text-sm text-gray-400">Money comes but doesn't stay.</p>
+                    <h3 class="font-magic text-xl text-white mb-3">Money Issues</h3>
+                    <p class="text-sm text-indigo-200/60">Money comes but doesn't stay. Constant financial instability.
+                    </p>
                 </div>
                 <!-- Card 2 -->
-                <div class="glass-panel p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 group">
-                    <div
-                        class="w-14 h-14 bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-red-900/50 transition-colors">
-                        <i data-lucide="heart-crack" class="text-red-400 w-6 h-6"></i>
+                <div class="card-obsidian p-8 rounded-lg text-left group">
+                    <div class="mb-4 opacity-50 group-hover:opacity-100 transition-opacity">
+                        <i data-lucide="heart-crack" class="w-8 h-8 text-gold-400"></i>
                     </div>
-                    <h3 class="font-serif text-xl mb-3">Relationship Tension</h3>
-                    <p class="text-sm text-gray-400">Constant conflicts in marriage.</p>
+                    <h3 class="font-magic text-xl text-white mb-3">Relationships</h3>
+                    <p class="text-sm text-indigo-200/60">Tension in marriage or family. Conflicts with no clear cause.
+                    </p>
                 </div>
                 <!-- Card 3 -->
-                <div class="glass-panel p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 group">
-                    <div
-                        class="w-14 h-14 bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-red-900/50 transition-colors">
-                        <i data-lucide="graduation-cap" class="text-red-400 w-6 h-6"></i>
+                <div class="card-obsidian p-8 rounded-lg text-left group">
+                    <div class="mb-4 opacity-50 group-hover:opacity-100 transition-opacity">
+                        <i data-lucide="graduation-cap" class="w-8 h-8 text-gold-400"></i>
                     </div>
-                    <h3 class="font-serif text-xl mb-3">Kids' Focus</h3>
-                    <p class="text-sm text-gray-400">Children losing focus in studies.</p>
+                    <h3 class="font-magic text-xl text-white mb-3">Kids & Focus</h3>
+                    <p class="text-sm text-indigo-200/60">Children losing focus, not studying, or facing academic
+                        hurdles.</p>
                 </div>
                 <!-- Card 4 -->
-                <div class="glass-panel p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 group">
-                    <div
-                        class="w-14 h-14 bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-red-900/50 transition-colors">
-                        <i data-lucide="activity" class="text-red-400 w-6 h-6"></i>
+                <div class="card-obsidian p-8 rounded-lg text-left group">
+                    <div class="mb-4 opacity-50 group-hover:opacity-100 transition-opacity">
+                        <i data-lucide="activity" class="w-8 h-8 text-gold-400"></i>
                     </div>
-                    <h3 class="font-serif text-xl mb-3">Health Issues</h3>
-                    <p class="text-sm text-gray-400">Sickness with no clear cause.</p>
+                    <h3 class="font-magic text-xl text-white mb-3">Health Issues</h3>
+                    <p class="text-sm text-indigo-200/60">Sickness with no clear cause or recurring ailments.</p>
                 </div>
                 <!-- Card 5 -->
-                <div class="glass-panel p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 group">
-                    <div
-                        class="w-14 h-14 bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-red-900/50 transition-colors">
-                        <i data-lucide="briefcase" class="text-red-400 w-6 h-6"></i>
+                <div class="card-obsidian p-8 rounded-lg text-left group">
+                    <div class="mb-4 opacity-50 group-hover:opacity-100 transition-opacity">
+                        <i data-lucide="briefcase" class="w-8 h-8 text-gold-400"></i>
                     </div>
-                    <h3 class="font-serif text-xl mb-3">Career Delay</h3>
-                    <p class="text-sm text-gray-400">Stress & delay in business.</p>
+                    <h3 class="font-magic text-xl text-white mb-3">Career & Biz</h3>
+                    <p class="text-sm text-indigo-200/60">Constant stress, delays, or stagnation in work or business.
+                    </p>
                 </div>
                 <!-- Card 6 -->
-                <div class="glass-panel p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 group">
-                    <div
-                        class="w-14 h-14 bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-red-900/50 transition-colors">
-                        <i data-lucide="refresh-ccw" class="text-red-400 w-6 h-6"></i>
+                <div class="card-obsidian p-8 rounded-lg text-left group">
+                    <div class="mb-4 opacity-50 group-hover:opacity-100 transition-opacity">
+                        <i data-lucide="refresh-ccw" class="w-8 h-8 text-gold-400"></i>
                     </div>
-                    <h3 class="font-serif text-xl mb-3">Temporary Fixes</h3>
-                    <p class="text-sm text-gray-400">Old advice only worked briefly.</p>
+                    <h3 class="font-magic text-xl text-white mb-3">Temporary Fixes</h3>
+                    <p class="text-sm text-indigo-200/60">Previous consultant's advice only worked temporarily.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CHECKLIST / AUDIENCE -->
-    <section class="py-24 bg-nebula/50 relative z-10 border-t border-white/5">
+    <!-- CHECKLIST / AUDIENCE (Scroll Style) -->
+    <section class="py-24 bg-cosmos-900/50 border-t border-gold-500/10 relative">
         <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-center font-serif text-3xl mb-12">Is This For You? <span class="text-gold-DEFAULT">Yes, If
-                    You...</span></h2>
+            <h2 class="text-center font-magic text-3xl md:text-4xl mb-12">Is This For You? <span
+                    class="text-gold-400">Yes, If You...</span></h2>
 
             <div class="space-y-4">
                 <div
-                    class="flex items-center gap-4 p-4 rounded bg-white/5 hover:bg-white/10 transition-colors border-l-4 border-gold-DEFAULT">
-                    <i data-lucide="check-circle-2" class="text-gold-DEFAULT shrink-0"></i>
-                    <p class="text-gray-200">Are a Seeker who believes there's a deeper cause behind what's happening.
-                    </p>
+                    class="flex items-center gap-4 p-5 rounded border border-white/5 bg-white/5 hover:bg-white/10 transition-all hover:border-gold-500/30">
+                    <i data-lucide="check-circle-2" class="text-gold-500 w-6 h-6 shrink-0"></i>
+                    <p class="text-lg text-indigo-100">Are a Seeker who believes there's a deeper cause behind what's
+                        happening.</p>
                 </div>
                 <div
-                    class="flex items-center gap-4 p-4 rounded bg-white/5 hover:bg-white/10 transition-colors border-l-4 border-gold-DEFAULT">
-                    <i data-lucide="check-circle-2" class="text-gold-DEFAULT shrink-0"></i>
-                    <p class="text-gray-200">Care about your home's energy, but don't know how to "read" or balance it.
-                    </p>
+                    class="flex items-center gap-4 p-5 rounded border border-white/5 bg-white/5 hover:bg-white/10 transition-all hover:border-gold-500/30">
+                    <i data-lucide="check-circle-2" class="text-gold-500 w-6 h-6 shrink-0"></i>
+                    <p class="text-lg text-indigo-100">Care about your home's energy, but don't know how to "read" or
+                        balance it.</p>
                 </div>
                 <div
-                    class="flex items-center gap-4 p-4 rounded bg-white/5 hover:bg-white/10 transition-colors border-l-4 border-gold-DEFAULT">
-                    <i data-lucide="check-circle-2" class="text-gold-DEFAULT shrink-0"></i>
-                    <p class="text-gray-200">Believe in creating a peaceful, intentional life & not just surviving day
-                        to day.</p>
+                    class="flex items-center gap-4 p-5 rounded border border-white/5 bg-white/5 hover:bg-white/10 transition-all hover:border-gold-500/30">
+                    <i data-lucide="check-circle-2" class="text-gold-500 w-6 h-6 shrink-0"></i>
+                    <p class="text-lg text-indigo-100">Believe in creating a peaceful, intentional life & not just
+                        surviving day to day.</p>
                 </div>
                 <div
-                    class="flex items-center gap-4 p-4 rounded bg-white/5 hover:bg-white/10 transition-colors border-l-4 border-gold-DEFAULT">
-                    <i data-lucide="check-circle-2" class="text-gold-DEFAULT shrink-0"></i>
-                    <p class="text-gray-200">Are ready for a shift - not just in knowledge, but in how your life flows.
-                    </p>
+                    class="flex items-center gap-4 p-5 rounded border border-white/5 bg-white/5 hover:bg-white/10 transition-all hover:border-gold-500/30">
+                    <i data-lucide="check-circle-2" class="text-gold-500 w-6 h-6 shrink-0"></i>
+                    <p class="text-lg text-indigo-100">Are ready for a shift - not just in knowledge, but in how your
+                        life flows.</p>
                 </div>
 
-                <!-- Special Callout -->
+                <!-- Gold Highlight Box -->
                 <div
-                    class="mt-8 p-6 rounded-xl border border-gold-DEFAULT/40 bg-gold-DEFAULT/10 flex items-start gap-4">
-                    <i data-lucide="star" class="text-gold-glow w-6 h-6 shrink-0 mt-1"></i>
-                    <p class="font-bold text-gold-light">Perfect for Architects, Interior Designers, Decor Consultants,
-                        or Property Dealers looking to Amplify Business with Astro-Vastu insights.</p>
+                    class="mt-8 p-6 rounded border border-gold-500 bg-gold-500/10 flex items-start gap-4 shadow-glow-gold">
+                    <i data-lucide="star" class="text-gold-400 w-8 h-8 shrink-0 mt-1 animate-pulse"></i>
+                    <p class="font-bold text-gold-100 text-lg">Perfect for Architects, Interior Designers, Decor
+                        Consultants, or Property Dealers looking to Amplify Business with Astro-Vastu insights.</p>
                 </div>
             </div>
         </div>
@@ -348,44 +410,49 @@
     <!-- COMPARISON -->
     <section class="py-24 relative z-10">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-center font-serif text-3xl md:text-4xl mb-16">Why Generic Vastu Fails <br><span
-                    class="text-gray-500 text-xl font-sans">(vs What Actually Works)</span></h2>
+            <h2 class="text-center font-magic text-3xl md:text-4xl mb-16">Why Generic Vastu Fails <br><span
+                    class="text-indigo-300 text-xl font-sans">(vs What Actually Works)</span></h2>
 
             <div class="grid md:grid-cols-2 gap-8 lg:gap-16">
                 <!-- Generic -->
-                <div class="p-8 rounded-2xl bg-red-950/20 border border-red-900/30">
-                    <h3 class="text-red-400 font-serif text-xl mb-6 flex items-center gap-2"><i
-                            data-lucide="x-circle"></i> Traditional Vastu</h3>
-                    <ul class="space-y-4 text-gray-400 text-sm">
-                        <li class="flex gap-2"><span class="text-red-500">✕</span> Costly renovations that disrupt your
-                            life.</li>
-                        <li class="flex gap-2"><span class="text-red-500">✕</span> Generic internet tips that don't
-                            match reality.</li>
-                        <li class="flex gap-2"><span class="text-red-500">✕</span> One-size-fits-all cures ignoring
-                            energy blueprint.</li>
-                        <li class="flex gap-2"><span class="text-red-500">✕</span> No alignment with your astrological
-                            chart.</li>
-                        <li class="flex gap-2"><span class="text-red-500">✕</span> Surface-level fixes treating symptoms
-                            only.</li>
+                <div class="p-8 rounded-2xl bg-red-950/10 border border-red-900/30 backdrop-blur-sm">
+                    <h3 class="text-red-400 font-magic text-2xl mb-6 flex items-center gap-3">
+                        <i data-lucide="x-circle"></i> Traditional Vastu
+                    </h3>
+                    <ul class="space-y-5 text-gray-400">
+                        <li class="flex gap-3 items-start"><span class="text-red-500 mt-1">✕</span> Costly renovations
+                            that disrupt your life.</li>
+                        <li class="flex gap-3 items-start"><span class="text-red-500 mt-1">✕</span> Generic internet
+                            tips that don't match reality.</li>
+                        <li class="flex gap-3 items-start"><span class="text-red-500 mt-1">✕</span> One-size-fits-all
+                            cures ignoring energy blueprint.</li>
+                        <li class="flex gap-3 items-start"><span class="text-red-500 mt-1">✕</span> No alignment with
+                            your astrological chart.</li>
+                        <li class="flex gap-3 items-start"><span class="text-red-500 mt-1">✕</span> Surface-level fixes
+                            treating symptoms only.</li>
                     </ul>
                 </div>
 
                 <!-- Astro Vastu -->
-                <div class="p-8 rounded-2xl bg-gold-DEFAULT/10 border border-gold-DEFAULT/30 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-20 h-20 bg-gold-DEFAULT blur-[50px] opacity-20"></div>
-                    <h3 class="text-gold-DEFAULT font-serif text-xl mb-6 flex items-center gap-2"><i
-                            data-lucide="check-circle-2"></i> The Astro-Vastu Method</h3>
-                    <ul class="space-y-4 text-gray-200 text-sm font-medium">
-                        <li class="flex gap-2"><span class="text-gold-DEFAULT">✓</span> Powerful non-invasive remedies
-                            (minimal changes).</li>
-                        <li class="flex gap-2"><span class="text-gold-DEFAULT">✓</span> 100% personalized map from birth
-                            chart.</li>
-                        <li class="flex gap-2"><span class="text-gold-DEFAULT">✓</span> Remedies tailored to wealth,
-                            health, peace.</li>
-                        <li class="flex gap-2"><span class="text-gold-DEFAULT">✓</span> Aligned with planetary positions
-                            for depth.</li>
-                        <li class="flex gap-2"><span class="text-gold-DEFAULT">✓</span> Root-cause healing at the
-                            source.</li>
+                <div
+                    class="p-8 rounded-2xl bg-gold-500/5 border border-gold-500/30 backdrop-blur-sm relative overflow-hidden group">
+                    <div
+                        class="absolute inset-0 bg-gold-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                    </div>
+                    <h3 class="text-gold-400 font-magic text-2xl mb-6 flex items-center gap-3">
+                        <i data-lucide="check-circle-2"></i> Astro-Vastu Method
+                    </h3>
+                    <ul class="space-y-5 text-gold-100">
+                        <li class="flex gap-3 items-start"><span class="text-gold-500 mt-1">✓</span> Powerful
+                            non-invasive remedies (minimal changes).</li>
+                        <li class="flex gap-3 items-start"><span class="text-gold-500 mt-1">✓</span> 100% personalized
+                            map from birth chart.</li>
+                        <li class="flex gap-3 items-start"><span class="text-gold-500 mt-1">✓</span> Remedies tailored
+                            to wealth, health, peace.</li>
+                        <li class="flex gap-3 items-start"><span class="text-gold-500 mt-1">✓</span> Aligned with
+                            planetary positions for depth.</li>
+                        <li class="flex gap-3 items-start"><span class="text-gold-500 mt-1">✓</span> Root-cause healing
+                            at the source.</li>
                     </ul>
                 </div>
             </div>
@@ -393,48 +460,58 @@
     </section>
 
     <!-- BONUSES -->
-    <section class="py-24 bg-nebula relative z-10 border-t border-white/5">
+    <section class="py-24 bg-cosmos-900/80 border-t border-gold-500/10">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
-                <span class="text-gold-DEFAULT uppercase tracking-widest text-xs font-bold">Live Only Exclusives</span>
-                <h2 class="text-3xl md:text-5xl font-serif mt-2">Bonuses Worth <span
-                        class="text-gold-glow">₹45,000</span></h2>
+                <span
+                    class="text-gold-500 uppercase tracking-widest text-xs font-bold border border-gold-500/30 px-3 py-1 rounded-full">Live
+                    Only Exclusives</span>
+                <h2 class="text-3xl md:text-5xl font-magic mt-4">Bonuses Worth <span
+                        class="text-gradient-gold">₹45,000</span></h2>
             </div>
 
             <div class="grid md:grid-cols-3 gap-6">
                 <!-- Bonus 1 -->
-                <div class="glass-panel p-8 rounded-xl text-center group hover:-translate-y-2 transition-transform">
+                <div class="card-obsidian p-8 rounded-xl text-center relative group">
                     <div
-                        class="w-16 h-16 rounded-full border border-gold-DEFAULT/30 flex items-center justify-center mx-auto mb-6 bg-void text-gold-DEFAULT group-hover:scale-110 transition-transform">
-                        <i data-lucide="book-open" class="w-8 h-8"></i>
+                        class="w-20 h-20 mx-auto mb-6 rounded-full border border-gold-500/30 flex items-center justify-center bg-cosmos-950 shadow-glow-gold group-hover:scale-110 transition-transform">
+                        <i data-lucide="book-open" class="w-8 h-8 text-gold-400"></i>
                     </div>
-                    <div class="inline-block bg-white/10 px-3 py-1 rounded text-xs mb-4">Value: ₹11,000</div>
-                    <h3 class="font-serif text-xl text-white mb-2">Vastu Starter Kit</h3>
-                    <p class="text-sm text-gray-400">Top 11 Remedies for Peace & Prosperity (PDF)</p>
+                    <div
+                        class="inline-block bg-white/5 px-3 py-1 rounded text-xs text-gold-200 mb-4 border border-white/5">
+                        Value: ₹11,000</div>
+                    <h3 class="font-magic text-xl text-white mb-2">Vastu Starter Kit</h3>
+                    <p class="text-sm text-indigo-200/60">Top 11 Remedies for Peace & Prosperity (PDF)</p>
                 </div>
+
                 <!-- Bonus 2 -->
                 <div
-                    class="glass-panel p-8 rounded-xl text-center group hover:-translate-y-2 transition-transform border-gold-DEFAULT/50 relative">
+                    class="card-obsidian p-8 rounded-xl text-center relative group border-gold-500/50 transform scale-105 z-10">
                     <div
-                        class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold-DEFAULT text-void text-[10px] font-bold px-3 py-1 rounded-full uppercase">
+                        class="absolute -top-3 left-1/2 -translate-x-1/2 bg-button-gradient text-cosmos-950 text-[10px] font-bold px-4 py-1 rounded-full uppercase shadow-lg">
                         Most Popular</div>
                     <div
-                        class="w-16 h-16 rounded-full border border-gold-DEFAULT/30 flex items-center justify-center mx-auto mb-6 bg-void text-gold-DEFAULT group-hover:scale-110 transition-transform">
-                        <i data-lucide="ticket" class="w-8 h-8"></i>
+                        class="w-20 h-20 mx-auto mb-6 rounded-full border border-gold-500 flex items-center justify-center bg-cosmos-950 shadow-glow-gold group-hover:scale-110 transition-transform">
+                        <i data-lucide="ticket" class="w-8 h-8 text-gold-400"></i>
                     </div>
-                    <div class="inline-block bg-white/10 px-3 py-1 rounded text-xs mb-4">Value: ₹31,000</div>
-                    <h3 class="font-serif text-xl text-white mb-2">Lucky Draw</h3>
-                    <p class="text-sm text-gray-400">Chance to Win FREE Personal Consultation</p>
-                </div>
-                <!-- Bonus 3 -->
-                <div class="glass-panel p-8 rounded-xl text-center group hover:-translate-y-2 transition-transform">
                     <div
-                        class="w-16 h-16 rounded-full border border-gold-DEFAULT/30 flex items-center justify-center mx-auto mb-6 bg-void text-gold-DEFAULT group-hover:scale-110 transition-transform">
-                        <i data-lucide="sparkles" class="w-8 h-8"></i>
+                        class="inline-block bg-white/5 px-3 py-1 rounded text-xs text-gold-200 mb-4 border border-white/5">
+                        Value: ₹31,000</div>
+                    <h3 class="font-magic text-xl text-white mb-2">Lucky Draw</h3>
+                    <p class="text-sm text-indigo-200/60">Chance to Win FREE Personal Consultation</p>
+                </div>
+
+                <!-- Bonus 3 -->
+                <div class="card-obsidian p-8 rounded-xl text-center relative group">
+                    <div
+                        class="w-20 h-20 mx-auto mb-6 rounded-full border border-gold-500/30 flex items-center justify-center bg-cosmos-950 shadow-glow-gold group-hover:scale-110 transition-transform">
+                        <i data-lucide="sparkles" class="w-8 h-8 text-gold-400"></i>
                     </div>
-                    <div class="inline-block bg-white/10 px-3 py-1 rounded text-xs mb-4">Value: ₹3,100</div>
-                    <h3 class="font-serif text-xl text-white mb-2">Aura Cleansing Guide</h3>
-                    <p class="text-sm text-gray-400">Improve Energy Instantly (PDF)</p>
+                    <div
+                        class="inline-block bg-white/5 px-3 py-1 rounded text-xs text-gold-200 mb-4 border border-white/5">
+                        Value: ₹3,100</div>
+                    <h3 class="font-magic text-xl text-white mb-2">Aura Cleansing</h3>
+                    <p class="text-sm text-indigo-200/60">Guide to Improve Energy Instantly (PDF)</p>
                 </div>
             </div>
         </div>
@@ -443,41 +520,49 @@
     <!-- TESTIMONIALS -->
     <section class="py-24 relative z-10">
         <div class="max-w-6xl mx-auto px-6 text-center">
-            <h2 class="text-3xl font-serif mb-12">Lives Transformed by <span class="text-gold-DEFAULT">Nidhi's
+            <h2 class="text-3xl font-magic mb-12">Lives Transformed by <span class="text-gold-400">Nidhi's
                     Guidance</span></h2>
 
             <div class="grid md:grid-cols-2 gap-8 text-left">
-                <div class="bg-white/5 p-8 rounded-xl border-l-4 border-gold-DEFAULT">
-                    <div class="flex text-gold-DEFAULT mb-4"><i data-lucide="star" class="fill-current w-4 h-4"></i><i
-                            data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star"
-                            class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i
-                            data-lucide="star" class="fill-current w-4 h-4"></i></div>
-                    <p class="text-gray-300 italic mb-6">"Before the Vastu corrections, we were facing constant stress,
-                        health concerns, and financial instability. But after your expert advice... found it very
-                        accurate."</p>
-                    <div class="flex items-center gap-3">
+                <!-- 1 -->
+                <div
+                    class="bg-white/5 p-8 rounded-xl border border-gold-500/20 hover:border-gold-500/50 transition-colors">
+                    <div class="flex text-gold-400 mb-4 gap-1">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star"
+                            class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i
+                            data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star"
+                            class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-indigo-100 italic mb-6 leading-relaxed">"Before the Vastu corrections, we were facing
+                        constant stress, health concerns, and financial instability. But after your expert advice...
+                        found it very accurate."</p>
+                    <div class="flex items-center gap-4">
                         <div
-                            class="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center font-serif font-bold">
+                            class="w-12 h-12 rounded-full bg-cosmos-800 border border-gold-500 flex items-center justify-center font-magic text-gold-400 text-lg">
                             S</div>
                         <div>
-                            <p class="font-bold">Samiksha</p>
+                            <p class="font-bold text-white">Samiksha</p>
                         </div>
                     </div>
                 </div>
-                <div class="bg-white/5 p-8 rounded-xl border-l-4 border-gold-DEFAULT">
-                    <div class="flex text-gold-DEFAULT mb-4"><i data-lucide="star" class="fill-current w-4 h-4"></i><i
-                            data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star"
-                            class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i
-                            data-lucide="star" class="fill-current w-4 h-4"></i></div>
-                    <p class="text-gray-300 italic mb-6">"Simple yet powerful remedies, there has been a noticeable
-                        positive shift in our lives. The energy in our home feels lighter, more balanced, and peaceful."
-                    </p>
-                    <div class="flex items-center gap-3">
+                <!-- 2 -->
+                <div
+                    class="bg-white/5 p-8 rounded-xl border border-gold-500/20 hover:border-gold-500/50 transition-colors">
+                    <div class="flex text-gold-400 mb-4 gap-1">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star"
+                            class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i
+                            data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star"
+                            class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-indigo-100 italic mb-6 leading-relaxed">"Simple yet powerful remedies, there has been
+                        a noticeable positive shift in our lives. The energy in our home feels lighter, more balanced,
+                        and peaceful."</p>
+                    <div class="flex items-center gap-4">
                         <div
-                            class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center font-serif font-bold">
+                            class="w-12 h-12 rounded-full bg-cosmos-800 border border-gold-500 flex items-center justify-center font-magic text-gold-400 text-lg">
                             AT</div>
                         <div>
-                            <p class="font-bold">Akash Tyagi Ji</p>
+                            <p class="font-bold text-white">Akash Tyagi Ji</p>
                         </div>
                     </div>
                 </div>
@@ -485,77 +570,99 @@
         </div>
     </section>
 
-    <!-- CTA FOOTER -->
+    <!-- FINAL CTA -->
     <section id="register" class="py-24 relative z-10 overflow-hidden">
-        <div class="absolute inset-0 bg-gold-DEFAULT/10 blur-[100px] pointer-events-none"></div>
+        <!-- Glows -->
+        <div
+            class="absolute bottom-0 left-0 w-full h-[300px] bg-gradient-to-t from-gold-600/20 to-transparent pointer-events-none">
+        </div>
+        <div class="absolute inset-0 bg-nebula-gradient opacity-80 z-[-1]"></div>
 
         <div class="max-w-2xl mx-auto px-6 text-center relative">
-            <h2 class="text-4xl md:text-5xl font-serif mb-6">Stop Guessing. <br>Start <span
-                    class="text-gold-DEFAULT">Fixing.</span></h2>
-            <p class="text-red-400 font-semibold animate-pulse mb-8">⚠️ Only 30 Seats Per Batch! Live Interactive
-                Webinar.</p>
+            <h2 class="text-4xl md:text-6xl font-magic mb-6">Stop Guessing. <br>Start <span
+                    class="text-gold-400">Fixing.</span></h2>
+
+            <div class="inline-block bg-red-900/30 border border-red-500/30 px-6 py-2 rounded-full mb-10 animate-pulse">
+                <p class="text-red-300 font-bold uppercase text-sm tracking-wider">⚠️ Only 30 Seats Per Batch!</p>
+            </div>
 
             <!-- Countdown -->
-            <div class="flex justify-center gap-4 mb-10 font-serif">
-                <div class="text-center">
-                    <div class="text-3xl text-gold-light">26</div>
-                    <div class="text-[10px] text-gray-500 uppercase">Days</div>
+            <div class="flex justify-center gap-4 mb-10 font-magic">
+                <div class="text-center bg-cosmos-900/80 p-4 rounded border border-gold-500/20 min-w-[80px]">
+                    <div class="text-3xl text-gold-400">26</div>
+                    <div class="text-[10px] text-gray-400 font-sans uppercase mt-1">Days</div>
                 </div>
-                <div class="text-center">
-                    <div class="text-3xl text-gold-light">18</div>
-                    <div class="text-[10px] text-gray-500 uppercase">Hrs</div>
+                <div class="text-center bg-cosmos-900/80 p-4 rounded border border-gold-500/20 min-w-[80px]">
+                    <div class="text-3xl text-gold-400">18</div>
+                    <div class="text-[10px] text-gray-400 font-sans uppercase mt-1">Hrs</div>
                 </div>
-                <div class="text-center">
-                    <div class="text-3xl text-gold-light">08</div>
-                    <div class="text-[10px] text-gray-500 uppercase">Mins</div>
+                <div class="text-center bg-cosmos-900/80 p-4 rounded border border-gold-500/20 min-w-[80px]">
+                    <div class="text-3xl text-gold-400">08</div>
+                    <div class="text-[10px] text-gray-400 font-sans uppercase mt-1">Mins</div>
                 </div>
-                <div class="text-center">
-                    <div class="text-3xl text-gold-light">01</div>
-                    <div class="text-[10px] text-gray-500 uppercase">Secs</div>
+                <div class="text-center bg-cosmos-900/80 p-4 rounded border border-gold-500/20 min-w-[80px]">
+                    <div class="text-3xl text-gold-400">01</div>
+                    <div class="text-[10px] text-gray-400 font-sans uppercase mt-1">Secs</div>
                 </div>
             </div>
 
-            <div class="glass-panel p-8 rounded-2xl">
-                <form class="space-y-4" onsubmit="event.preventDefault(); alert('Redirecting to payment gateway...');">
+            <!-- Form -->
+            <div class="card-obsidian p-8 rounded-2xl">
+                <form class="space-y-4" onsubmit="event.preventDefault(); alert('Redirecting to payment...');">
                     <input type="text" placeholder="Enter Your Name"
-                        class="w-full bg-void/50 border border-white/10 rounded p-4 text-white focus:border-gold-DEFAULT outline-none transition-colors">
+                        class="w-full bg-cosmos-950/60 border border-gold-500/20 rounded p-4 text-white focus:border-gold-500 outline-none transition-colors placeholder-indigo-200/30">
                     <input type="email" placeholder="Enter Your Email"
-                        class="w-full bg-void/50 border border-white/10 rounded p-4 text-white focus:border-gold-DEFAULT outline-none transition-colors">
+                        class="w-full bg-cosmos-950/60 border border-gold-500/20 rounded p-4 text-white focus:border-gold-500 outline-none transition-colors placeholder-indigo-200/30">
                     <input type="tel" placeholder="Phone Number"
-                        class="w-full bg-void/50 border border-white/10 rounded p-4 text-white focus:border-gold-DEFAULT outline-none transition-colors">
+                        class="w-full bg-cosmos-950/60 border border-gold-500/20 rounded p-4 text-white focus:border-gold-500 outline-none transition-colors placeholder-indigo-200/30">
 
                     <button
-                        class="w-full btn-cosmic bg-gold-shimmer text-void font-bold text-xl py-4 rounded hover:brightness-110 transition-all">
-                        Reserve Your Spot Now
+                        class="w-full bg-button-gradient btn-gold text-cosmos-950 font-bold text-xl py-4 rounded hover:shadow-glow-gold transition-all transform hover:-translate-y-1">
+                        RESERVE YOUR SPOT NOW
                     </button>
                 </form>
+                <p class="text-xs text-gray-500 mt-4">Safe & Secure Payment • Live Interactive Webinar</p>
             </div>
 
-            <footer class="mt-16 text-gray-600 text-sm">
+            <footer class="mt-20 text-indigo-200/40 text-sm">
+                <div class="flex justify-center gap-6 mb-6">
+                    <i data-lucide="facebook" class="w-6 h-6 hover:text-gold-400 cursor-pointer transition-colors"></i>
+                    <i data-lucide="instagram" class="w-6 h-6 hover:text-gold-400 cursor-pointer transition-colors"></i>
+                    <i data-lucide="youtube" class="w-6 h-6 hover:text-gold-400 cursor-pointer transition-colors"></i>
+                </div>
                 <p>&copy; 2025 Nidhi Astro Vastu. All rights reserved.</p>
             </footer>
         </div>
     </section>
 
     <script>
-        // Icons
+        // Init Icons
         lucide.createIcons();
 
-        // Stars Generation
-        const stars = document.getElementById('stars');
-        for (let i = 0; i < 150; i++) {
+        // Stars Logic
+        const starsContainer = document.getElementById('stars-container');
+        const starCount = 150;
+
+        for (let i = 0; i < starCount; i++) {
             const star = document.createElement('div');
-            star.className = 'star';
-            const size = Math.random() * 2;
-            star.style.width = size + 'px';
-            star.style.height = size + 'px';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.animation = `twinkle ${Math.random() * 3 + 2}s infinite`;
-            stars.appendChild(star);
+            star.classList.add('star');
+
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const size = Math.random() * 3;
+            const duration = Math.random() * 3 + 2;
+            const delay = Math.random() * 5;
+
+            star.style.left = `${x}%`;
+            star.style.top = `${y}%`;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.setProperty('--duration', `${duration}s`);
+            star.style.animationDelay = `${delay}s`;
+
+            starsContainer.appendChild(star);
         }
     </script>
 </body>
 
 </html>
-```
