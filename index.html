@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro Vastu Live Webinar</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vastu: {
+                            dark: '#020617', // Slate 950
+                            card: '#0f172a', // Slate 900
+                            gold: '#fbbf24', // Amber 400
+                            accent: '#10b981', // Emerald 500
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "url('https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop')",
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #020617;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #sticky-footer {
+            transform: translateY(100%);
+            transition: transform 0.4s ease-out;
+        }
+
+        #sticky-footer.visible {
+            transform: translateY(0);
+        }
+
+        /* Scrollbar Hiding - Bulletproof Way */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        /* Smooth Scroll Behavior */
+        .scroll-smooth-touch {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased">
+
+    <header
+        class="fixed top-0 left-0 w-full z-50 bg-vastu-dark/80 backdrop-blur-md border-b border-white/5 shadow-lg py-3">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2 group">
+                <div
+                    class="w-10 h-10 rounded-full border border-vastu-gold/30 bg-vastu-gold/10 flex items-center justify-center text-vastu-gold text-xl">
+                    ☸</div>
+                <div class="flex flex-col">
+                    <span class="font-serif font-bold text-white text-lg leading-none tracking-wide">ASTRO VASTU</span>
+                    <span class="text-[10px] text-vastu-gold tracking-[0.2em] uppercase">LIVE WEBINAR</span>
+                </div>
+            </a>
+            <button onclick="scrollToReg()"
+                class="px-6 py-2 bg-gradient-to-r from-vastu-gold to-orange-500 rounded-full text-black font-bold text-sm hover:shadow-[0_0_20px_rgba(251,191,36,0.3)] transition-all">
+                Reserve Your Spot
+            </button>
+        </div>
+    </header>
+
+    <section class="relative min-h-screen w-full flex items-center pt-32 pb-20 bg-cover bg-center"
+        style="background-image: linear-gradient(to bottom, rgba(2,6,23,0.9), rgba(2,6,23,0.8)), url('https://img.freepik.com/free-photo/high-angle-woman-reading-tarot-home_23-2150276065.jpg?t=st=1765776732~exp=1765780332~hmac=87c713aa00a5a68fa304742358eab6aa421b97c722654fba303b291fdd0ae093&w=1480');">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+
+                <div class="w-full lg:w-3/5 space-y-8 text-left">
+
+                    <div
+                        class="inline-block px-4 py-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-300 font-semibold animate-pulse">
+                        Are Problems Repeating in Your Life? Your Home's Energy Might Be the Reason !
+                    </div>
+
+                    <h3 class="text-xl md:text-2xl text-vastu-gold font-medium leading-relaxed">
+                        Join The Masterclass & Solve Your Problems Related to Money, Relationships, Health & Career .
+                    </h3>
+
+                    <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
+                        Without Spending on Expensive Consultants or Remedies.
+                    </h1>
+
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 py-2">
+                        <div class="glass-card px-5 py-2 rounded-full flex items-center gap-3">
+                            <span class="text-vastu-gold">Host:</span> <span class="font-bold">Nidhi</span>
+                        </div>
+                        <div class="glass-card px-5 py-2 rounded-full flex items-center gap-3">
+                            <span class="text-vastu-gold">Live Webinar :</span> <span class="font-bold">2nd August 2025
+                                8 PM</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <button onclick="scrollToReg()"
+                            class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-vastu-gold to-orange-500 rounded-lg text-black font-bold text-lg shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:-translate-y-1 transition-all">
+                            Yes! I Want to Attend the Masterclass Only @ ₹99/-
+                            <span class="block text-xs font-normal opacity-80 mt-1"><s>₹499/-</s> | Only 30 Seats Per
+                                Batch!</span>
+                        </button>
+                        <p class="mt-4 text-sm text-slate-400">This is a LIVE Interactive Webinar — Not a Recording.</p>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-2/5 flex justify-center lg:justify-start">
+                    <div
+                        class="relative w-full max-w-[360px] aspect-[9/16] rounded-2xl overflow-hidden border-2 border-slate-700 shadow-2xl bg-black">
+                        <video controls class="w-full h-full object-cover">
+                            <source src="./heroVideo.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-vastu-dark">
+        <div class="container mx-auto px-6">
+            <h2 class="font-serif text-2xl md:text-4xl text-center text-white mb-12">
+                Are You Feeling Stuck In Life - Even After Trying Everything?
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <div
+                    class="glass-card p-6 rounded-xl border-l-4 border-red-500 flex items-center gap-4 hover:bg-slate-800 transition">
+                    <span class="text-2xl">💰</span> <span class="text-slate-200">Money comes but doesn't stay.</span>
+                </div>
+                <div
+                    class="glass-card p-6 rounded-xl border-l-4 border-red-500 flex items-center gap-4 hover:bg-slate-800 transition">
+                    <span class="text-2xl">💔</span> <span class="text-slate-200">Tension in Relationships &
+                        Marriage</span>
+                </div>
+                <div
+                    class="glass-card p-6 rounded-xl border-l-4 border-red-500 flex items-center gap-4 hover:bg-slate-800 transition">
+                    <span class="text-2xl">📉</span> <span class="text-slate-200">Children losing focus and not
+                        studying.</span>
+                </div>
+                <div
+                    class="glass-card p-6 rounded-xl border-l-4 border-red-500 flex items-center gap-4 hover:bg-slate-800 transition">
+                    <span class="text-2xl">🤒</span> <span class="text-slate-200">Health Issues with No Clear
+                        Cause</span>
+                </div>
+                <div
+                    class="glass-card p-6 rounded-xl border-l-4 border-red-500 flex items-center gap-4 hover:bg-slate-800 transition">
+                    <span class="text-2xl">🚫</span> <span class="text-slate-200">Constant Stress & Delay in Work Or
+                        Business</span>
+                </div>
+                <div
+                    class="glass-card p-6 rounded-xl border-l-4 border-red-500 flex items-center gap-4 hover:bg-slate-800 transition">
+                    <span class="text-2xl">🤷</span> <span class="text-slate-200">Previous Consultant's Advice Worked
+                        Temporarily</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-slate-900 border-y border-slate-800">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="space-y-6">
+                <div class="flex gap-4 items-start">
+                    <div class="mt-1 min-w-[24px] text-vastu-gold text-xl">✔</div>
+                    <p class="text-slate-300 text-lg">Instantly Identify Energy Blocks in Your Home — Even If Everything
+                        <span class="italic">Looks</span> Perfect on the Surface
+                    </p>
+                </div>
+                <div class="flex gap-4 items-start">
+                    <div class="mt-1 min-w-[24px] text-vastu-gold text-xl">✔</div>
+                    <p class="text-slate-300 text-lg">Get Proven, Step-by-Step Remedies to Attract Wealth, Peace &
+                        Positive Energy—Without Costly Renovations</p>
+                </div>
+                <div class="flex gap-4 items-start">
+                    <div class="mt-1 min-w-[24px] text-vastu-gold text-xl">✔</div>
+                    <p class="text-slate-300 text-lg">Discover Top 3 Mistakes People Unknowingly Make in Their Home
+                        Layout</p>
+                </div>
+                <div class="flex gap-4 items-start">
+                    <div class="mt-1 min-w-[24px] text-vastu-gold text-xl">✔</div>
+                    <p class="text-slate-300 text-lg">Uncover What to Check First When Things Keep Going Wrong</p>
+                </div>
+                <div class="flex gap-4 items-start">
+                    <div class="mt-1 min-w-[24px] text-vastu-gold text-xl">✔</div>
+                    <p class="text-slate-300 text-lg">Find Out Why This Is Your One Stop Solution</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-vastu-dark">
+        <div class="container mx-auto px-6">
+            <h2 class="font-serif text-3xl md:text-4xl text-center text-vastu-gold mb-12">Is This For You? Yes, If
+                You...</h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass-card p-8 rounded-2xl border border-vastu-gold/20 flex gap-4">
+                    <div class="text-vastu-gold text-2xl">☑</div>
+                    <p class="text-slate-300">You're a Seeker who believes there's a deeper cause behind what's
+                        happening in life</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl border border-vastu-gold/20 flex gap-4">
+                    <div class="text-vastu-gold text-2xl">☑</div>
+                    <p class="text-slate-300">You care about your home's energy, but don't know how to "read" or balance
+                        it</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl border border-vastu-gold/20 flex gap-4">
+                    <div class="text-vastu-gold text-2xl">☑</div>
+                    <p class="text-slate-300">You believe in creating a peaceful, intentional life & not just surviving
+                        day to day</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl border border-vastu-gold/20 flex gap-4">
+                    <div class="text-vastu-gold text-2xl">☑</div>
+                    <p class="text-slate-300">You're ready for a shift - not just in knowledge, but in how your life
+                        flows</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl border border-vastu-gold/20 flex gap-4">
+                    <div class="text-vastu-gold text-2xl">☑</div>
+                    <p class="text-slate-300">You love learning spiritual or ancient sciences that can be applied
+                        practically</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl border border-vastu-gold/20 flex gap-4">
+                    <div class="text-vastu-gold text-2xl">☑</div>
+                    <p class="text-slate-300">If You're An Architect, Interior Designer, Decor Consultants or Property
+                        Dealer looking to Amplify Your Business with Astro-Vastu insights.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-slate-950">
+        <div class="container mx-auto px-6">
+            <h2 class="font-serif text-3xl md:text-4xl text-center text-white mb-16">
+                Why Generic Vastu Fails (and What Actually Works)
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-16">
+
+                <div class="bg-red-950/20 border border-red-900/50 p-8 rounded-2xl">
+                    <h3 class="text-xl font-bold text-red-400 mb-8 bg-red-900/30 py-3 px-4 rounded text-center">Why
+                        Traditional Vastu Fails You</h3>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <span class="text-red-500 text-xl">✖</span>
+                            <p class="text-slate-300 text-sm">Costly renovations that disrupt your life — without
+                                guaranteed results.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-red-500 text-xl">✖</span>
+                            <p class="text-slate-300 text-sm">Generic tips copied from the internet that don't match
+                                your reality.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-red-500 text-xl">✖</span>
+                            <p class="text-slate-300 text-sm">One-size-fits-all cures that ignore your home's unique
+                                energy blueprint.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-red-500 text-xl">✖</span>
+                            <p class="text-slate-300 text-sm">No alignment with your astrological chart — missing the
+                                deeper cosmic root.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-red-500 text-xl">✖</span>
+                            <p class="text-slate-300 text-sm">Surface-level fixes that treat symptoms, not the energetic
+                                cause</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-emerald-950/20 border border-emerald-900/50 p-8 rounded-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-emerald-500/10 w-32 h-32 blur-3xl rounded-full"></div>
+                    <h3 class="text-xl font-bold text-emerald-400 mb-8 bg-emerald-900/30 py-3 px-4 rounded text-center">
+                        The Astro-Vastu Method That Actually Works</h3>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <span class="text-emerald-500 text-xl">✔</span>
+                            <p class="text-white text-sm">Powerful non-invasive remedies — with minimal changes.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-emerald-500 text-xl">✔</span>
+                            <p class="text-white text-sm">100% personalized energy map created from your birth chart.
+                            </p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-emerald-500 text-xl">✔</span>
+                            <p class="text-white text-sm">Remedies tailored to your family's specific goals: wealth,
+                                health, peace.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-emerald-500 text-xl">✔</span>
+                            <p class="text-white text-sm">Vastu aligned with planetary positions — for deeper, lasting
+                                change.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-emerald-500 text-xl">✔</span>
+                            <p class="text-white text-sm">Root-cause healing that balances energy at its source.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <p class="text-xl text-vastu-gold mb-6 font-serif">Would you take a chance to discover the secrets &
+                    change your life?</p>
+                <button onclick="scrollToReg()"
+                    class="px-8 py-4 bg-gradient-to-r from-vastu-gold to-orange-500 rounded-lg text-black font-bold text-lg shadow-[0_0_30px_rgba(251,191,36,0.3)] hover:scale-105 transition-all">
+                    Yes! I Want to Attend the Masterclass Only @ ₹99/-
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-vastu-dark relative overflow-hidden" x-data="{ 
+    activeModal: null,
+    scrollLeft() { $refs.slider.scrollBy({ left: -400, behavior: 'smooth' }) },
+    scrollRight() { $refs.slider.scrollBy({ left: 400, behavior: 'smooth' }) },
+    testimonials: [
+        {
+            name: 'Sh. Sham Sundar',
+            thumb: './images/sham-sundar.png', 
+            video: 'https://www.youtube.com/embed/dQw4w9WgXcQ', 
+            title: '“Wrong Toilet Placement + Wrong Entry = Double Trouble! 🚫😓',
+            text: 'After Nidhi Ji’s Astro-Vastu Consultation, this family finally broke free from years of hidden energy blockages—without breaking a single wall. Hear how just two changes brought peace, clarity, and results!'
+        },
+        {
+            name: 'Priya',
+            thumb: './images/priya.png',
+            video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            title: 'From Daily Headaches to Daily Gratitude 🙏✨',
+            text: 'After suffering silently with pain, financial instability, and her child’s study struggles, this mother found relief—not in medicine, but in Astro-Vastu. 🎯 Just by shifting the study table and correcting toilet placement, her child began helping others in class—and her own health started to heal. This is not magic—it’s misalignment corrected through ancient wisdom. Sometimes, the right direction... changes everything.'
+        },
+        {
+            name: 'Sh. Kashmiri Lal Ji',
+            thumb: './images/thumb-kashmiri-lal.jpg',
+            video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            title: 'Business Uplifted. Relationships Healed. All Through Energy Alignment. 🏠✨',
+            text: 'When factory growth meets family harmony—you know Vastu is working. ✅ Remedies done ✔ ✅ Results visible ✔ ✅ Peace at home & profit at work ✔ Discover how Astro-Vastu realignment brought success in both business and personal life—without breaking a single wall.'
+        },
+        {
+            name: 'Sandeep S',
+            thumb: './images/thumb-sandeep.jpg',
+            video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            title: '',
+            text: 'Nidhi ji, thank you for transforming our home and life. Your simple Vastu remedies solved long-standing issues effortlessly. We’re following your astrological guidance with full trust. Grateful from me, my wife, and our child — heartfelt thanks!'
+        },
+        {
+            name: 'Samiksha',
+            thumb: './images/thumb-samiksha.jpg',
+            video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            title: '',
+            text: 'Thank you so much Nidhi, We found your advice very accurate'
+        },
+        {
+            name: 'Akash Tyagi Ji',
+            thumb: './images/thumb-akash-tyagi.jpg',
+            video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            title: 'From Constant Stress to Complete Peace — All Thanks to Astro-Vastu ✨🙏',
+            text: 'Before consulting Nidhi Ji, this family was overwhelmed with stress, health concerns, and financial instability. After applying her simple yet powerful Astro-Vastu remedies, their home energy became lighter, more balanced, and peaceful. 🔄 Proof that when your home aligns with your stars, your life transforms.'
+        },
+        {
+            name: 'Chandra Prakash',
+            thumb: './images/thumb-chandra-prakash.jpg',
+            video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            title: '',
+            text: 'Building our new home in Faridabad was a smoother journey with Nidhi ji’s Diwasu consultation. Her expert guidance and multiple online sessions were truly helpful. She was supportive throughout and ensured every detail aligned perfectly. Grateful for her insights — we’re now confident and at peace with our new space.'
+        }
+    ]
+}">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none"
+            style="background-image: radial-gradient(circle at 50% 50%, #fbbf24 0%, transparent 50%);">
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="font-serif text-3xl md:text-5xl text-center text-white mb-4">
+                See How Nidhi's Guidance Transformed <br><span class="text-vastu-gold">Their Lives</span>
+            </h2>
+            <div class="w-24 h-1 bg-vastu-gold mx-auto mb-16 rounded-full shadow-[0_0_15px_rgba(251,191,36,0.5)]"></div>
+
+            <div class="relative group/slider mx-auto max-w-[1400px]">
+
+                <div
+                    class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-vastu-dark to-transparent z-10 pointer-events-none hidden md:block">
+                </div>
+                <div
+                    class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-vastu-dark to-transparent z-10 pointer-events-none hidden md:block">
+                </div>
+
+                <button @click="scrollLeft()"
+                    class="absolute left-2 md:-left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 bg-slate-900/80 backdrop-blur-md text-vastu-gold border border-vastu-gold/30 rounded-full flex items-center justify-center hover:bg-vastu-gold hover:text-black transition-all duration-300 shadow-2xl group-hover/slider:scale-100 md:scale-95">
+                    <span class="text-2xl md:text-3xl font-bold pb-1 pr-1">←</span>
+                </button>
+
+                <button @click="scrollRight()"
+                    class="absolute right-2 md:-right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 bg-slate-900/80 backdrop-blur-md text-vastu-gold border border-vastu-gold/30 rounded-full flex items-center justify-center hover:bg-vastu-gold hover:text-black transition-all duration-300 shadow-2xl group-hover/slider:scale-100 md:scale-95">
+                    <span class="text-2xl md:text-3xl font-bold pb-1 pl-1">→</span>
+                </button>
+
+                <div x-ref="slider"
+                    class="flex overflow-x-auto gap-6 snap-x snap-mandatory no-scrollbar scroll-smooth-touch px-12 md:px-16 py-8">
+
+                    <template x-for="(item, index) in testimonials" :key="index">
+                        <div @click="activeModal = item"
+                            class="min-w-[300px] md:min-w-[400px] snap-center cursor-pointer group card-hover-effect relative">
+                            <div
+                                class="absolute -inset-0.5 bg-gradient-to-b from-vastu-gold/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 blur-sm">
+                            </div>
+
+                            <div
+                                class="relative glass-card p-5 rounded-2xl h-full bg-slate-900/60 hover:bg-slate-800 transition duration-300 border border-white/5 group-hover:border-vastu-gold/40 flex flex-col shadow-lg">
+
+                                <div
+                                    class="relative aspect-video rounded-xl overflow-hidden mb-5 border border-slate-700 bg-black shadow-inner">
+                                    <img :src="item.thumb" :alt="item.name"
+                                        class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition duration-700 group-hover:scale-105">
+
+                                    <div
+                                        class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition">
+                                        <div
+                                            class="w-14 h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 group-hover:bg-vastu-gold group-hover:border-vastu-gold transition-all duration-300 shadow-[0_0_20px_rgba(0,0,0,0.3)] group-hover:scale-110">
+                                            <span class="text-white group-hover:text-black text-2xl ml-1">▶</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-auto px-2">
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-600 text-lg shadow-inner">
+                                            👤
+                                        </div>
+                                        <div>
+                                            <h4 class="text-white font-bold text-lg tracking-wide group-hover:text-vastu-gold transition"
+                                                x-text="item.name"></h4>
+                                            <p class="text-slate-400 text-xs uppercase tracking-wider">Happy Client</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </template>
+
+                </div>
+            </div>
+
+            <div class="flex justify-center gap-2 mt-2 md:hidden">
+                <span class="text-slate-500 text-[10px] uppercase tracking-widest animate-pulse">Swipe for more
+                    stories</span>
+            </div>
+        </div>
+
+        <div x-show="activeModal" style="display: none;"
+            class="fixed inset-0 z-[100] flex items-center justify-center px-4"
+            x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+
+            <div class="absolute inset-0 bg-black/95 backdrop-blur-sm" @click="activeModal = null"></div>
+
+            <div class="relative bg-white rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl border border-slate-700"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-90 translate-y-4"
+                x-transition:enter-end="opacity-100 scale-100 translate-y-0">
+
+                <button @click="activeModal = null"
+                    class="absolute top-4 right-4 z-50 w-10 h-10 bg-black/50 hover:bg-black text-white rounded-full flex items-center justify-center transition backdrop-blur-md">
+                    ✕
+                </button>
+
+                <div class="grid md:grid-cols-5 h-[80vh] md:h-auto">
+                    <div class="md:col-span-3 bg-black flex items-center h-[30vh] md:h-[500px]">
+                        <iframe class="w-full h-full" :src="activeModal ? activeModal.video : ''"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <div
+                        class="md:col-span-2 bg-slate-50 p-6 md:p-8 overflow-y-auto h-full max-h-[500px] flex flex-col">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div
+                                class="w-12 h-12 rounded-full overflow-hidden bg-slate-200 border border-slate-300 shadow-md flex-shrink-0">
+                                <img :src="activeModal ? activeModal.thumb : ''" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg leading-none"
+                                    x-text="activeModal ? activeModal.name : ''"></h4>
+                                <span class="text-xs text-green-600 font-bold uppercase tracking-wider">Verified
+                                    Result</span>
+                            </div>
+                        </div>
+
+                        <template x-if="activeModal && activeModal.title">
+                            <h3 class="font-serif font-bold text-lg md:text-xl mb-4 leading-tight text-slate-800"
+                                x-text="activeModal.title"></h3>
+                        </template>
+
+                        <div class="prose prose-sm text-slate-600 leading-relaxed overflow-y-auto pr-2 custom-scroll">
+                            <p x-text="activeModal ? activeModal.text : ''"></p>
+                        </div>
+
+                        <div class="mt-auto pt-6 border-t border-slate-200">
+                            <button @click="activeModal = null; scrollToReg()"
+                                class="w-full py-3 bg-vastu-dark text-vastu-gold font-bold rounded-lg hover:bg-black transition text-sm">
+                                I Want Results Like This
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-gradient-to-t from-slate-900 to-vastu-dark relative">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-2xl mb-2 block">🎁</span>
+                <h2 class="font-serif text-3xl md:text-5xl text-white">Exclusive Bonuses When You Attend Live</h2>
+                <div class="w-24 h-1 bg-vastu-gold mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div
+                    class="border border-dashed border-vastu-gold/40 bg-vastu-gold/5 p-8 rounded-xl text-center hover:-translate-y-2 transition duration-300">
+                    <h3 class="text-lg font-bold text-white mb-4 min-h-[60px] flex items-center justify-center">Vastu
+                        Starter Kit- Top 11 Remedies for Peace & Prosperity (PDF)</h3>
+                    <div
+                        class="inline-block bg-orange-500 text-white font-bold px-4 py-1 rounded-full transform -rotate-2">
+                        ₹11,000
+                    </div>
+                </div>
+
+                <div
+                    class="border border-dashed border-vastu-gold/40 bg-vastu-gold/5 p-8 rounded-xl text-center hover:-translate-y-2 transition duration-300">
+                    <h3 class="text-lg font-bold text-white mb-4 min-h-[60px] flex items-center justify-center">Lucky
+                        Draw & Chance to Win FREE Personal Consultation</h3>
+                    <div
+                        class="inline-block bg-orange-500 text-white font-bold px-4 py-1 rounded-full transform -rotate-2">
+                        ₹31,000
+                    </div>
+                </div>
+
+                <div
+                    class="border border-dashed border-vastu-gold/40 bg-vastu-gold/5 p-8 rounded-xl text-center hover:-translate-y-2 transition duration-300">
+                    <h3 class="text-lg font-bold text-white mb-4 min-h-[60px] flex items-center justify-center">Aura
+                        Cleansing Guide –Improve Energy Instantly (PDF)</h3>
+                    <div
+                        class="inline-block bg-orange-500 text-white font-bold px-4 py-1 rounded-full transform -rotate-2">
+                        ₹3,100
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="register-section" class="py-24 bg-black text-center">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="font-serif text-3xl md:text-5xl text-vastu-gold mb-10">Stop Guessing & Start Fixing !!</h2>
+
+            <div
+                class="glass-card p-8 md:p-12 rounded-3xl border border-vastu-gold/30 shadow-[0_0_50px_rgba(251,191,36,0.1)]">
+                <div class="text-red-500 font-bold mb-6 text-lg animate-pulse">Limited Time Access !! Reserve Your Spot
+                    Now Before It's Gone .</div>
+
+                <div class="grid grid-cols-4 gap-4 mb-8 max-w-md mx-auto">
+                    <div class="bg-slate-800 p-3 rounded-lg">
+                        <div class="text-2xl font-bold text-white">09</div>
+                        <div class="text-[10px] text-slate-400">DAYS</div>
+                    </div>
+                    <div class="bg-slate-800 p-3 rounded-lg">
+                        <div class="text-2xl font-bold text-white">09</div>
+                        <div class="text-[10px] text-slate-400">HOURS</div>
+                    </div>
+                    <div class="bg-slate-800 p-3 rounded-lg">
+                        <div class="text-2xl font-bold text-white">43</div>
+                        <div class="text-[10px] text-slate-400">MINS</div>
+                    </div>
+                    <div class="bg-slate-800 p-3 rounded-lg">
+                        <div class="text-2xl font-bold text-white">39</div>
+                        <div class="text-[10px] text-slate-400">SECS</div>
+                    </div>
+                </div>
+
+                <button onclick="alert('Redirecting to payment...')"
+                    class="w-full py-5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full text-white font-bold text-xl hover:brightness-110 transition duration-300 shadow-xl mb-4">
+                    Register Now & Change Your Life !!
+                </button>
+
+                <p class="text-vastu-gold font-medium">Get Bonuses Worth ₹45,000 — Live Only!</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="sticky-footer"
+        class="fixed bottom-0 left-0 w-full z-50 bg-slate-900/95 backdrop-blur-md border-t border-slate-700 p-4 shadow-2xl">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="hidden md:block">
+                <p class="text-white font-bold">Astro Vastu Live Webinar</p>
+                <p class="text-vastu-gold text-sm">2nd August 2025 8 PM</p>
+            </div>
+            <button onclick="scrollToReg()"
+                class="w-full md:w-auto px-8 py-3 bg-vastu-gold text-black font-bold rounded-full hover:bg-white transition duration-300">
+                Yes! I Want to Attend the Masterclass Only @ ₹99/-
+            </button>
+        </div>
+    </div>
+
+    <footer class="bg-black py-8 text-center text-slate-700 text-xs">
+        <p>&copy; 2025 Astro Vastu Webinar. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function scrollToReg() {
+            document.getElementById('register-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Sticky Footer Logic
+        window.addEventListener('scroll', () => {
+            const footer = document.getElementById('sticky-footer');
+            if (window.scrollY > 600) footer.classList.add('visible');
+            else footer.classList.remove('visible');
+        });
+    </script>
+</body>
+
+</html>
